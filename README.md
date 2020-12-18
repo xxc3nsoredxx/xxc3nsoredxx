@@ -10,7 +10,7 @@ The bio field on the profile is quite short, so finding out I could make a profi
 
 ## Education
 I've got a BS in Computer Science, and I currently have two semesters of my Master's done.
-I'm in my school's Information Assurance track which focuses on cyber security related coursework, and I's also trying to get the Graduate Level Designation in Cyber Operations.
+I'm in my school's Information Assurance track which focuses on cyber security related coursework, and I'm also trying to get the Graduate Level Designation in Cyber Operations.
 
 ## Interests and whatnot
 My main interests are cyber security, low level development, and Linux.
@@ -56,4 +56,4 @@ Then again the 1st gen Model B had a 700 MHz CPU and 512 MiB of RAM, so perhaps 
 My main distro of choice these days is Gentoo.
 I've ran it on two different laptops for nearly 5 years now I think and plan on sticking with it for the foreseeable future.
 Manually configuring the kernel and controlling package compilation with USE flags to include only the features I need fits my DIY aesthetic perfectly.
-Unsurprisingly perhaps, a lot of my work revolves around Linux.
+Unsurprisingly perhaps, a lot of my work you can find on here revolves around Linux.
