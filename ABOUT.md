@@ -44,7 +44,7 @@ Manually configuring the kernel and controlling package compilation with USE fla
 Unsurprisingly perhaps, a lot of what you can find on here revolves around Linux.
 For example, [these random utilities][misc-utils] and [my collection of dotfiles][dotfiles].
 
-<h2><a href='/xxc3nsoredxx'><code>return</code></a></h2>
+<h2><a href='https://github.com/xxc3nsoredxx'><code>return</code></a></h2>
 
 
 <!-- link refs -->
