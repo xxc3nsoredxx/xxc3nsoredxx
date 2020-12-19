@@ -8,6 +8,12 @@ This can only mean one of two things:
 
 The bio field on the profile is quite short, so finding out I could make a profile README was great.
 
+## tl;dr
+Hacking, low level dev, Linux.
+That's what I tend to do in my free time.
+
+[`goto end`](README.md#end)
+
 ## Education
 I've got a BS in Computer Science, and I currently have two semesters of my Master's done.
 I'm in my school's Information Assurance track which focuses on cyber security related coursework, and I'm also trying to get the Graduate Level Designation in Cyber Operations.
@@ -59,6 +65,8 @@ I've ran it on two different laptops for nearly 5 years now I think and plan on 
 Manually configuring the kernel and controlling package compilation with USE flags to include only the features I need fits my DIY aesthetic perfectly.
 Unsurprisingly perhaps, a lot of what you can find on here revolves around Linux.
 For example, [these random utilities][misc-utils] and [my collection of dotfiles][dotfiles].
+
+#### end:
 
 
 <!-- link refs -->
