@@ -12,7 +12,7 @@ The bio field on the profile is quite short, so finding out I could make a profi
 Hacking, low level dev, Linux.
 That's what I tend to do in my free time.
 
-[`goto end`](README.md#end)
+[`goto end`](#end)
 
 ## Education
 I've got a BS in Computer Science, and I currently have two semesters of my Master's done.
