@@ -25,6 +25,10 @@ I absolutely love that.
 ## too short; want more
 [A longer "about me"][about] for people who want more rambling in textual form.
 
+## Random things I did
+[Setting up Yubikey for Linux 2FA login][yubikey]
+
 
 <!-- link refs -->
-[about]:ABOUT.md
+[about]: ABOUT.md
+[yubikey]: yubikey_linux_2fa/
