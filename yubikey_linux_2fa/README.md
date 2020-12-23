@@ -85,7 +85,6 @@ Then lock and require the root password to unlock.
 If root is not logged in the script should do nothing.
 
 You can find my script for this [here][root_lock.sh].
-TODO: REPLACE THE LINK WITH THE WORKING LINK ONCE THE SCRIPT IS UPLOADED.
 
 If root isn't already logged in, log in.
 Then unplug the Yubikey.
