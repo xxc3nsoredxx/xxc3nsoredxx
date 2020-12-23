@@ -90,6 +90,8 @@ If root isn't already logged in, log in.
 Then unplug the Yubikey.
 If all went well, the machine should lock and require the root password (and Yubikey) to unlock.
 
+<h2><a href='https://github.com/xxc3nsoredxx'><code>return</code></a></h2>
+
 
 <!-- link refs -->
 [pam-u2f]: https://github.com/Yubico/pam-u2f
