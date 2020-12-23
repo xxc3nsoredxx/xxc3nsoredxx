@@ -89,8 +89,9 @@ TODO: REPLACE THE LINK WITH THE WORKING LINK ONCE THE SCRIPT IS UPLOADED.
 
 If root isn't already logged in, log in.
 Then unplug the Yubikey.
+If all went well, the machine should lock and require the root password (and Yubikey) to unlock.
 
 
 <!-- link refs -->
 [pam-u2f]: https://github.com/Yubico/pam-u2f
-[root_lock.sh]: https://example.com
+[root_lock.sh]: https://github.com/xxc3nsoredxx/misc-utils/blob/master/root_lock/root_lock.sh
