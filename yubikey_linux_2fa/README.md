@@ -10,7 +10,7 @@ In my case, specifically for logging in as root.
    * `CONFIG_USB_HIDDEV`
 
 ## Registering a key to a user
-Add your user to the `plugdev` group (if it isn't already) by running (as root):
+Add the user to the `plugdev` group (if it isn't already) by running (as root):
 ```bash
 usermod -a -G plugdev user
 ```
@@ -59,7 +59,7 @@ Both when directly through login or through `su(1)`.
 On the other hand, if root isn't logged in then plugging/unplugging shouldn't do anything.
 
 The best way to do detect removal of the Yubikey is through `udev`.
-Running `udevadm monitor -k -p`, followed by plugging in and removing it, gives me this as the earliest uevent that could be used:
+Running `udevadm monitor -k -p`, followed by plugging in and removing it, gave this as the earliest uevent that could be used:
 ```
 KERNEL[1683.664130] remove   /devices/pci0000:00/0000:00:08.1/0000:06:00.4/usb4/4-2/4-2:1.0/0003:1050:0407.0003/input/input16 (input)
 ACTION=remove
@@ -81,7 +81,7 @@ So the corresponding rule placed in `/etc/udev/rules.d/00-yubikey.rules` is:
 ACTION=="remove", SUBSYSTEM=="input", ENV{PRODUCT}=="*1050/407*", RUN+="/usr/local/bin/root_lock.sh"
 ```
 
-Since there isn't a builtin method to test for who's logged in that covers both physical and `su(1)`, I need to create a script to handle that that.
+Since there isn't a builtin method to test for who's logged in that covers both physical and `su(1)`, I had to create a script to handle that that.
 The script should check if root is logged in.
 Then lock and require the root password to unlock.
 If root is not logged in the script should do nothing.

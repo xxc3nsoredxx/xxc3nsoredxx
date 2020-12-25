@@ -18,7 +18,7 @@ My main interests are cyber security, low level development, and Linux.
 Bonus points for things that combine two of them together.
 If it covers all three, then you've _really_ piqued my interest now!
 
-I use Gentoo on my laptops because, other than LFS, I don't know of anything that starts you out with as bare of a slate and has you to build up from there.
+I use Gentoo on my laptops because, other than LFS, I don't know of anything that starts you out with as bare of a slate and has you build up from there.
 Even when installing programs you have a very minimal default set of features and have to explicitly instruct Portage to compile in more if you want more.
 I absolutely love that.
 
