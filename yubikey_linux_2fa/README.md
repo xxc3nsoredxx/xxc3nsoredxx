@@ -53,6 +53,8 @@ Which will likely require either a live boot or dropping into single user mode t
 A rather sticky situation indeed.
 Leave a spare root login open (such as in a TTY) when messing around with PAM.
 
+See also: [Gentoo Wiki page][yubikey gentoo wiki] where I wrote up a more detailed set of instructions up to this point.
+
 ## Root logged in? Yubikey removed? LOCK!
 Since my goal with this is to make a more secure root user, pulling out the Yubikey while root is logged in should instantly lock the machine.
 Both when directly through login or through `su(1)`.
@@ -100,4 +102,5 @@ If all went well, the machine should lock and require the root password (and Yub
 
 <!-- link refs -->
 [pam-u2f]: https://github.com/Yubico/pam-u2f
+[yubikey gentoo wiki]: https://wiki.gentoo.org/wiki/YubiKey
 [root_lock.sh]: https://github.com/xxc3nsoredxx/misc-utils/blob/master/root_lock/root_lock.sh

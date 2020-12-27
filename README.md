@@ -27,8 +27,10 @@ I absolutely love that.
 
 ## Random things I did
 [Setting up Yubikey for Linux 2FA login][yubikey]
+&mdash; See also: [Gentoo Wiki page][yubikey gentoo wiki] where I wrote up a more detailed set of instructions.
 
 
 <!-- link refs -->
 [about]: ABOUT.md
 [yubikey]: yubikey_linux_2fa/
+[yubikey gentoo wiki]: https://wiki.gentoo.org/wiki/YubiKey
