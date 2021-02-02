@@ -29,8 +29,17 @@ I absolutely love that.
 [Setting up Yubikey for Linux 2FA login][yubikey]
 &mdash; See also: [Gentoo Wiki page][yubikey gentoo wiki] where I wrote up a more detailed set of instructions.
 
+## PGP
+[Public key][pgp]
+
+[Download-friendly link][pgp raw]
+
 
 <!-- link refs -->
 [about]: ABOUT.md
 [yubikey]: yubikey_linux_2fa/
 [yubikey gentoo wiki]: https://wiki.gentoo.org/wiki/YubiKey
+
+<!-- public key links will stay at the end, raw download last -->
+[pgp]: pubkey.asc
+[pgp raw]: https://raw.githubusercontent.com/xxc3nsoredxx/xxc3nsoredxx/master/pubkey.asc
