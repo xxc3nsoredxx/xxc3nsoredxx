@@ -1,0 +1,74 @@
+awk (real time from time(1))
+- awk -e '/y/{print "test"}' test.txt > test.txt.swp && mv test.txt{.swp,}
+  - 5   MiB:   :00.40 Used 9.4 MiB of memory
+  - 50  MiB:      :03 Used 9.4 MiB of memory
+  - 200 MiB:      :15 Used 9.4 MiB of memory
+  - 1.0 GiB:     1:17 Used 9.4 MiB of memory
+  - 5.1 GiB:     6:33 Used 9.4 MiB of memory
+
+nano (timed with phone stopwatch)
+- opening the file
+  - 5   MiB:     <:01 Used 249 MiB of memory
+  - 50  MiB:      :03 Used 2.0 GiB of memory
+  - 200 MiB:      :10 Used 9.38 GiB of memory
+  - 1.0 GiB:     6:15 Used 48 GiB of memory
+  - 5.1 GiB:      NaN OOM with total-vm:650918008kB
+- C-\ M-r y NL test NL a (regex replace all)
+  - 5   MiB:      :01 Used 570 MiB of memory
+  - 50  MiB:      :11 Used 5.48 GiB of memory
+  - 200 MiB:      :42 Used 21.9 GiB of memory
+  - 1.0 GiB:      NaN OOM with total-vm:65083756kB
+  - 5.1 GiB:      NaN
+- writing the new file to disk and quitting
+  - 5   MiB:     <:01 C-x y NL
+  - 50  MiB:      :02 C-x y NL
+  - 200 MiB:      :07 C-x y NL
+  - 1.0 GiB:      NaN
+  - 5.1 GiB:      NaN
+
+sd (real time from time(1))
+- sd y test test.txt
+  - 5   MiB:   :00.08 Used ???? GiB of memory
+                      Too fast for top(1) to react to it
+  - 50  MiB:   :00.62 Used 1.18 GiB of memory
+  - 200 MiB:      :02 Used 2.51 GiB of memory
+  - 1.0 GiB:      :12 Used 8 GiB of memory
+  - 5.1 GiB:     1:02 Used 39 GiB of memory
+
+sed (real time from time(1))
+- sed -i -e 's/y/test/' test.txt
+  - 5   MiB:   :00.52 Used 7.7 MiB of memory
+  - 50  MiB:      :05 Used 7.7 MiB of memory
+  - 200 MiB:      :20 Used 7.7 MiB of memory
+  - 1.0 GiB:     1:43 Used 7.7 MiB of memory
+  - 5.1 GiB:     8:59 Used 7.7 MiB of memory
+
+vim (timed with phone stopwatch)
+- opening the file
+  - 5   MiB:     <:01 Used 172 MiB of memory
+  - 50  MiB:      :01 Used 172 MiB of memory
+  - 200 MiB:      :04 Used 643 MiB of memory
+  - 1.0 GiB:      :23 Used 3.16 GiB of memory
+  - 5.1 GiB:     1:47 Used 15.8 GiB of memory
+- :%s/y/test/
+  - 5   MiB:      :07 Used 445 MiB of memory
+  - 50  MiB:     8:55 Used 4.22 GiB of memory
+  - 200 MiB: >1:15:00 Used 12.4 GiB of memory, C-c
+                      The last "test" is 72% of the way into the file
+  - 1.0 GiB:   >35:00 Used 11.2 GiB of memory, C-c
+                      The last "test" is only 9% of the way into the file
+                      I ain't doing this again
+                      I ran the tests from largest to smallest
+  - 5.1 GiB:  3:00:00 Used 29.1 GiB of memory
+              3:30:00 Something on my system has entered swap
+                      .test.txt.swp is 9.2 GiB in size as well
+                      Also, it's 01:51; I'm considering going to bed
+              4:00:00 RAM is consistently at 100% capacity now
+            >12:30:00 Used 40 GiB of memory. its_time_to_stop.jpg
+                      The last "test" is only 7% of the way into the file
+- writing the new file to disk and quitting
+  - 5   MiB:     <:01 :wq
+  - 50  MiB:      :03 :wq
+  - 200 MiB:      :03 :q!
+  - 1.0 GiB:      :03 :q!
+  - 5.1 GiB:     1:00 :q! 
