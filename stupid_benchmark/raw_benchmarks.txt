@@ -12,7 +12,7 @@ nano (timed with phone stopwatch)
   - 50  MiB:      :03 Used 2.0 GiB of memory
   - 200 MiB:      :10 Used 9.38 GiB of memory
   - 1.0 GiB:     6:15 Used 48 GiB of memory
-  - 5.1 GiB:      NaN OOM with total-vm:650918008kB
+  - 5.1 GiB:      NaN OOM with total-vm:65091808kB
 - C-\ M-r y NL test NL a (regex replace all)
   - 5   MiB:      :01 Used 570 MiB of memory
   - 50  MiB:      :11 Used 5.48 GiB of memory
@@ -45,7 +45,7 @@ sed (real time from time(1))
 
 vim (timed with phone stopwatch)
 - opening the file
-  - 5   MiB:     <:01 Used 172 MiB of memory
+  - 5   MiB:     <:01 Used 30.6 MiB of memory
   - 50  MiB:      :01 Used 172 MiB of memory
   - 200 MiB:      :04 Used 643 MiB of memory
   - 1.0 GiB:      :23 Used 3.16 GiB of memory
