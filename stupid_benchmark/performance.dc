@@ -16,22 +16,14 @@
 # MiB in original file
 # MiB of memory used
 # execution time in seconds
-# [/*]sa
-# execution time in seconds
-# MiB of memory used
-# MiB in original file
 [*r/]sa
 
-# Calculate the memory efficiency metric
+# Calculate the memory effectiveness metric
 # [top of stack]
 # MiB in original file
 # MiB of memory used
 # execution time in seconds
-# [*r/]se
-# execution time in seconds
-# MiB of memory used
-# MiB in original file
-[/*]se
+[r/*]se
 
 # ==============================================================================
 
@@ -39,23 +31,23 @@
 # ---------------------
 [awk aggressiveness ]n
 5 9.4 0.40 lax p
-[awk efficiency ]n
+[awk effectiveness ]n
 5 9.4 0.40 lex p
 [nano aggressiveness ]n
 5 570 3 lax p
-[nano efficiency ]n
+[nano effectiveness ]n
 5 570 3 lex p
 [sd aggressiveness ]n
 [???]p
-[sd efficiency ]n
+[sd effectiveness ]n
 [???]p
 [sed aggressiveness ]n
 5 7.7 0.52 lax p
-[sed efficiency ]n
+[sed effectiveness ]n
 5 7.7 0.52 lex p
 [vim aggressiveness ]n
 5 445 9 lax p
-[vim efficiency ]n
+[vim effectiveness ]n
 5 445 9 lex p
 []p
 
@@ -63,23 +55,23 @@
 # ----------------------
 [awk aggressiveness ]n
 50 9.4 3 lax p
-[awk efficiency ]n
+[awk effectiveness ]n
 50 9.4 3 lex p
 [nano aggressiveness ]n
 50 5.48lgx 16 lax p
-[nano efficiency ]n
+[nano effectiveness ]n
 50 5.48lgx 16 lex p
 [sd aggressiveness ]n
 50 1.18lgx 0.62 lax p
-[sd efficiency ]n
+[sd effectiveness ]n
 50 1.18lgx 0.62 lex p
 [sed aggressiveness ]n
 50 7.7 5 lax p
-[sed efficiency ]n
+[sed effectiveness ]n
 50 7.7 5 lex p
 [vim aggressiveness ]n
 50 4.22lgx 8lmx59+ lax p
-[vim efficiency ]n
+[vim effectiveness ]n
 50 4.22lgx 8lmx59+ lex p
 []p
 
@@ -87,27 +79,27 @@
 # -----------------------
 [awk aggressiveness ]n
 200 9.4 15 lax p
-[awk efficiency ]n
+[awk effectiveness ]n
 200 9.4 15 lex p
 [nano aggressiveness ]n
 200 21.9lgx 59 lax p
-[nano efficiency ]n
+[nano effectiveness ]n
 200 21.9lgx 59 lex p
 [sd aggressiveness ]n
 200 2.51lgx 2 lax p
-[sd efficiency ]n
+[sd effectiveness ]n
 200 2.51lgx 2 lex p
 [sed aggressiveness ]n
 200 7.7 20 lax p
-[sed efficiency ]n
+[sed effectiveness ]n
 200 7.7 20 lex p
 [vim aggressiveness ]n
 200 12.4lgx 1lhx15lmx+ lax p
-[vim efficiency ]n
+[vim effectiveness ]n
 200 12.4lgx 1lhx15lmx+ lex p
 [vim est aggressiveness ]n
 200 16.4lgx 1lhx40lmx+ lax p
-[vim est efficiency ]n
+[vim est effectiveness ]n
 200 16.4lgx 1lhx40lmx+ lex p
 []p
 
@@ -115,23 +107,23 @@
 # ---------------------
 [awk aggressiveness ]n
 1lgx 9.4 1lmx17+ lax p
-[awk efficiency ]n
+[awk effectiveness ]n
 1lgx 9.4 1lmx17+ lex p
 [nano aggressiveness ]n
 0 p
-[nano efficiency ]n
+[nano effectiveness ]n
 0 p
 [sd aggressiveness ]n
 1lgx 8lgx 12 lax p
-[sd efficiency ]n
+[sd effectiveness ]n
 1lgx 8lgx 12 lex p
 [sed aggressiveness ]n
 1lgx 7.7 1lmx43+ lax p
-[sed efficiency ]n
+[sed effectiveness ]n
 1lgx 7.7 1lmx43+ lex p
 [vim aggressiveness ]n
 0 p
-[vim efficiency ]n
+[vim effectiveness ]n
 0 p
 []p
 
@@ -139,22 +131,22 @@
 # -----------------------
 [awk aggressiveness ]n
 5.1lgx 9.4 6lmx33+ lax p
-[awk efficiency ]n
+[awk effectiveness ]n
 5.1lgx 9.4 6lmx33+ lex p
 [nano aggressiveness ]n
 0 p
-[nano efficiency ]n
+[nano effectiveness ]n
 0 p
 [sd aggressiveness ]n
 5.1lgx 39lgx 1lmx2+ lax p
-[sd efficiency ]n
+[sd effectiveness ]n
 5.1lgx 39lgx 1lmx2+ lex p
 [sed aggressiveness ]n
 5.1lgx 7.7 8lmx59+ lax p
-[sed efficiency ]n
+[sed effectiveness ]n
 5.1lgx 7.7 8lmx59+ lex p
 [vim aggressiveness ]n
 0 p
-[vim efficiency ]n
+[vim effectiveness ]n
 0 p
 []p

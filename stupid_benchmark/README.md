@@ -84,6 +84,7 @@ Each step was timed on my phone.
 | Replace | ---    | :01    | ---    | ---    | :07    |
 | Write   | ---    | <:01   | ---    | ---    | <:01   |
 | Total   | :00.40 | <:03\* | :00.08 | :00.52 | <:09\* |
+
 \* Does not account for time taken to enter the commands
 
 #### Memory Usage
@@ -100,6 +101,7 @@ Each step was timed on my phone.
 | Replace | --- | :11   | ---    | --- | 8:55   |
 | Write   | --- | :02   | ---    | --- | :03    |
 | Total   | :03 | :16\* | :00.62 | :05 | 8:59\* |
+
 \* Does not account for time taken to enter the commands
 
 #### Memory Usage
@@ -116,6 +118,7 @@ Each step was timed on my phone.
 | Replace | --- | :42   | --- | --- | >1:15:00   |
 | Write   | --- | :07   | --- | --- | :03\*\*    |
 | Total   | :15 | :59\* | :02 | :20 | >1:15:00\* |
+
 \* Does not account for time taken to enter the commands
 
 \*\* `:wq!` because replace was interrupted
@@ -139,6 +142,7 @@ Extrapolating assuming linear growth, it may have finished in another ~25 minute
 | Replace | ---  | NaN  | --- | ---  | >35:00   |
 | Write   | ---  | NaN  | --- | ---  | :03\*\*  |
 | Total   | 1:17 | NaN  | :12 | 1:43 | >35:00\* |
+
 \* Does not account for time taken to enter the commands
 
 \*\* `:wq!` because replace was interrupted
@@ -162,6 +166,7 @@ Although, it would have taken _unbearably_ long for that to happen because it wo
 | Replace | ---  | NaN  | ---  | ---  | >12:30:00   |
 | Write   | ---  | NaN  | ---  | ---  | 1:00\*\*    |
 | Total   | 6:33 | NaN  | 1:02 | 8:59 | >12:30:00\* |
+
 \* Does not account for time taken to enter the commands
 
 \*\* `:wq!` because replace was interrupted
@@ -186,9 +191,9 @@ The performance metrics are:
 memory aggressiveness = (execution time in seconds) * ----------------------
                                                       (MiB in original file)
 
-                                                 (MiB of memory used)
-memory efficiency = (MiB in original file) * ---------------------------
-                                             (execution time in seconds)
+                                                (execution time in seconds)
+memory effectiveness = (MiB in original file) * ---------------------------
+                                                    (MiB of memory used)
 ```
 
 |         | awk  | nano | sd   | sed  | vim         |
