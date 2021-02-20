@@ -187,22 +187,44 @@ I interrupted it and the last `test` was only 7% of the way into the file.
 ### Performance
 The performance metrics are:
 ```
-                                                       (MiB of memory used)
-memory aggressiveness = (execution time in seconds) * ----------------------
-                                                      (MiB in original file)
+                        (execution time in seconds) * (MiB of memory used)
+memory aggressiveness = --------------------------------------------------
+                                      (MiB in original file)
 
-                                                (execution time in seconds)
-memory effectiveness = (MiB in original file) * ---------------------------
-                                                    (MiB of memory used)
+                                       (MiB of memory used)
+memory effectiveness = ----------------------------------------------------
+                       (MiB in original file) * (execution time in seconds)
 ```
+The resulting results are then normalized by dividing by `sed`'s values.
+These are some extremely un-scientific metrics and I have no idea how valid they actually are.
+This was just done for fun and curiosity's sake.
+Nonetheless, I feel like they give some idea to how aggressively each program asks for memory and how effective that memory is at speeding up the regex replace (compared to `sed`).
 
-|         | awk  | nano | sd   | sed  | vim         |
-|:-       |:---  |:---- |:--   |:---  |:---         |
-| 5 MiB   |
-| 50 MiB  |
-| 200 MiB |
-| 1 GiB   |
-| 5.1 GiB |
+|                        | awk    | nano  | sd    | sed | vim    | vim (est) |
+|:-                      |:---    |:----  |:--    |:--- |:---    |:--------- |
+| 5 MiB aggressiveness   | 0.9391 | 427.1 | nan   | 1.0 | 1000   |           |
+| 5 MiB effectiveness    | 1.587  | 12.83 | nan   | 1.0 | 3.339  |           |
+| 50 MiB aggressiveness  | 0.7325 | 2332  | 19.46 | 1.0 | 60498  |           |
+| 50 MiB effectiveness   | 2.035  | 227.7 | 1266  | 1.0 | 5.206  |           |
+| 200 MiB aggressiveness | 0.9156 | 8592  | 33.38 | 1.0 | 371034 | 654296    |
+| 200 MiB effectiveness  | 1.628  | 987.3 | 3338  | 1.0 | 7.329  | 7.270     |
+| 1 GiB aggressiveness   | 0.9126 | nan   | 123.9 | 1.0 | nan    |           |
+| 1 GiB effectiveness    | 1.633  | nan   | 9132  | 1.0 | nan    |           |
+| 5.1 GiB aggressiveness | 0.8901 | nan   | 596.6 | 1.0 | nan    |           |
+| 5.1 GiB effectiveness  | 1.674  | nan   | 45089 | 1.0 | nan    |           |
+
+|                        | awk  | nano | sd   | sed  | vim         | vim (est) |
+|:-                      |:---  |:---- |:--   |:---  |:---         |:--------- |
+| 5 MiB aggressiveness   | 0.939060939060939 | 427.07292707292703 | nan | 1.0 | 1000.2497502497502
+| 5 MiB effectiveness    | 1.587012987012987 | 12.831168831168831 | nan | 1.0 | 3.339105339105339
+| 50 MiB aggressiveness  | 0.7324675324675325 | 2332.06025974026 | 19.458659740259737 | 1.0 | 60497.92
+| 50 MiB effectiveness   | 2.0346320346320343 | 227.74025974025975 | 1265.5215751989945 | 1.0 | 5.205985109510155
+| 200 MiB aggressiveness | 0.9155844155844155 | 8591.625974025974 | 33.37974025974025 | 1.0 | 371033.7662337662 | 654296.1038961038
+| 200 MiB effectiveness  | 1.6277056277056277 | 987.259520140876 | 3337.9740259740256 | 1.0 | 7.329062049062049 | 7.269956709956709
+| 1 GiB aggressiveness   | 0.912621359223301 | nan | 123.94906064808977 | 1.0 | nan
+| 1 GiB effectiveness    | 1.6329903862371395 | nan | 9131.77489177489 | 1.0 | nan
+| 5.1 GiB aggressiveness | 0.8901043298074839 | nan | 596.5910898007372 | 1.0 | nan
+| 5.1 GiB effectiveness  | 1.6743002544529262 | nan | 45089.032258064515 | 1.0 | nan
 
 
 <!-- link refs -->
