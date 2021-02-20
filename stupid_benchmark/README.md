@@ -18,8 +18,9 @@ The test itself is simple: create a file with a bunch of text and run a regex re
 Runtime was collected using "real time" from bash's `time` command or approximated using the stopwatch on my phone.
 Memory usage was from the "Virtual Memory Size" column in `top`.
 Not all of this memory was necessarily used, but it's what the process wanted, so I'm using it as a worst case.
+I ran the tests from largest file to smallest file which is why some of the data for Vim isn't "true data" but rather an estimate.
 
-### Data
+### Test data
 The files were nothing more than a bunch of lines of 'y' generated with:
 ```bash
 yes | pv -s <size> -S > test.txt.<size>
@@ -98,22 +99,22 @@ Each step was timed on my phone.
 | After open          | ---     | 2.0 GiB | ---      | ---     | 172 MiB  |
 | After replace       | 9.4 MiB | 5.48 GiB| 1.18 GiB | 7.7 MiB | 4.22 GiB |
 
-| 200 MiB Runtime | awk | nano  | sd  | sed | vim       | vim (est) |
-|:--------------- |:--- |:----  |:--  |:--- |:---       |:--------- |
-| Open            | --- | :10   | --- | --- | :04       |           |
-| Replace         | --- | :42   | --- | --- | >1:15:00  |           |
-| Write           | --- | :07   | --- | --- | :03\*\*\* |           |
-| Total           | :15 | :59\* | :02 | :20 | >1:15:00  | >1:40:00  |
+| 200 MiB Runtime | awk | nano  | sd  | sed | vim       | vim (estimate) |
+|:--------------- |:--- |:----  |:--  |:--- |:---       |:-------------- |
+| Open            | --- | :10   | --- | --- | :04       |                |
+| Replace         | --- | :42   | --- | --- | >1:15:00  |                |
+| Write           | --- | :07   | --- | --- | :03\*\*\* |                |
+| Total           | :15 | :59\* | :02 | :20 | >1:15:00  | >1:40:00       |
 
-| 200 MiB Memory Usage | awk     | nano    | sd       | sed     | vim       | vim (est) |
-|:-------------------- |:---     |:----    |:--       |:---     |:---       |:--------- |
-| After open           | ---     | 9.38 GiB| ---      | ---     | 643 MiB   |           |
-| After replace        | 9.4 MiB | 21.9 GiB| 2.51 GiB | 7.7 MiB | >12.4 GiB | >16.4 GiB |
+| 200 MiB Memory Usage | awk     | nano    | sd       | sed     | vim       | vim (estimate) |
+|:-------------------- |:---     |:----    |:--       |:---     |:---       |:-------------- |
+| After open           | ---     | 9.38 GiB| ---      | ---     | 643 MiB   |                |
+| After replace        | 9.4 MiB | 21.9 GiB| 2.51 GiB | 7.7 MiB | >12.4 GiB | >16.4 GiB      |
 
 I left `vim` running while I went to go eat.
 Since it hadn't finished by the time I got back, I hit `C-c` to interrupt it.
 The last "test" was 72% of the way into the file.
-Extrapolating assuming roughly linear growth, it may have finished in another ~25 minutes and used up at least another 4 GiB of memory.
+Extrapolating assuming roughly linear growth as more of the file is processed, it may have finished in another ~25 minutes at best and used up at least another 4 GiB of memory.
 
 | 1 GiB Runtime | awk  | nano | sd  | sed  | vim       |
 |:------------- |:---  |:---- |:--  |:---  |:---       |
@@ -148,21 +149,21 @@ At 3 hours in, `vim` had used 29.1 GiB of memory.
 30 minutes later processes began entering swap, but `vim` still fit into RAM.
 30 more minutes and RAM began overflowing into swap.
 At this point I went to sleep and let things run overnight.
-After coming back to it in the morning `vim` had only gone up to using 40 GiB of memory because it was running from swap.
+After coming back to it in the morning `vim` had only gone up to using 40 GiB of memory because it was slowed down due to running from swap.
 I interrupted it and the last `test` was only 7% of the way into the file.
 
-| Performance            | awk   | nano   | sd    | vim    | vim (est) |
-|:-----------            |:---   |:----   |:--    |:---    |:--------- |
-| 5 MiB aggressiveness   | 1.221 | 74.03  | ???   | 57.79  |           |
-| 5 MiB effectiveness    | 1.3   | 0.1733 | 6.5   | 0.0578 |           |
-| 50 MiB aggressiveness  | 1.221 | 728.8  | 156.9 | 561.2  |           |
-| 50 MiB effectiveness   | 1.667 | 0.3125 | 8.065 | 0.0093 |           |
-| 200 MiB aggressiveness | 1.221 | 2912   | 333.8 | 1649   | 2181      |
-| 200 MiB effectiveness  | 1.333 | 0.3390 | 10.0  | 0.0044 | 0.0033    |
-| 1 GiB aggressiveness   | 1.221 | NaN    | 1064  | NaN    |           |
-| 1 GiB effectiveness    | 1.338 | NaN    | 8.583 | NaN    |           |
-| 5.1 GiB aggressiveness | 1.221 | NaN    | 5186  | NaN    |           |
-| 5.1 GiB effectiveness  | 1.372 | NaN    | 8.694 | NaN    |           |
+| Performance            | awk   | nano   | sd      | vim     | vim (estimate) |
+|:-----------            |:---   |:----   |:--      |:---     |:-------------- |
+| 5 MiB aggressiveness   | 1.221 | 74.03  | ???\*\* | 57.79   |                |
+| 5 MiB effectiveness    | 1.3   | 0.1733 | 6.5     | 0.0578  |                |
+| 50 MiB aggressiveness  | 1.221 | 728.8  | 156.9   | 561.2   |                |
+| 50 MiB effectiveness   | 1.667 | 0.3125 | 8.065   | 0.0093  |                |
+| 200 MiB aggressiveness | 1.221 | 2912   | 333.8   | >1649   | >2181          |
+| 200 MiB effectiveness  | 1.333 | 0.3390 | 10.0    | <0.0044 | <0.0033        |
+| 1 GiB aggressiveness   | 1.221 | NaN    | 1064    | NaN     |                |
+| 1 GiB effectiveness    | 1.338 | NaN    | 8.583   | NaN     |                |
+| 5.1 GiB aggressiveness | 1.221 | NaN    | 5186    | NaN     |                |
+| 5.1 GiB effectiveness  | 1.372 | NaN    | 8.694   | NaN     |                |
 
 The performance metrics are:
 ```
@@ -175,7 +176,8 @@ memory effectiveness = -------------------------
                        execution time in seconds
 ```
 The results are then normalized by dividing by `sed`'s values.
-A higher value means more aggressive memory allocation and more effective memory use than `sed`, respectively.
+A higher value means more aggressive memory allocation and more effective memory use, respectively.
+Values greater than 1 mean "more than `sed`," and less than 1 mean "less than `sed`."
 
 \* Does not account for time taken to enter the commands.
 
@@ -186,16 +188,18 @@ A higher value means more aggressive memory allocation and more effective memory
 ## Conclusion
 Both `awk` and `sed` are extremely consistent.
 In the test configuration at least, they used the same amount of memory for their internal buffers no matter the size of the input data.
+`awk` had a slightly larger buffer than `sed`, and was slightly faster too.
 They're standard tools available on pretty much any \*nix system.
 They run reasonably fast for reasonable loads.
 They can also do a lot more than simple regex replace, but this benchmark isn't testing that.
 
 Nano and Vim fail miserably, but that's unsurprising since they're arguably the wrong tool for the job.
 They're designed for editing text not bulk data processing.
-Vim's regex replace feature is fantastic, and I use it a lot, but only in the context of normal text editing.
+Vim's regex features are fantastic, and I use them a lot, but only in the context of normal text editing.
 
-The tool I was most interested in, and the one I hadn't heard of until now, is `sd`.
-It used up _a lot_ of memory, but it also tore right through _a lot_ of data.
+The tool I was most interested in, and the clear winner, is `sd`.
+It used _a lot_ of memory, but it also tore right through _a lot_ of data.
+The author ran a slightly more scientific `sed` vs `sd` benchmark, but the results were similar to mine.
 I'm very impressed and definitely keeping this tool around.
 [Here's a link to sd again in case you missed it above.][sd]
 
