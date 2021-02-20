@@ -16,7 +16,6 @@ def perf (mib_orig, mib_mem, exec_time):
     return (mib_mem/mib_orig, mib_orig/exec_time)
 
 # Normalize the performance metrics
-# Each value is taken log_sed
 # sed is always at index 3
 def norm (perf):
     sed_a, sed_e = perf[3]
