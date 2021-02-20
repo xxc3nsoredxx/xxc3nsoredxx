@@ -12,12 +12,14 @@ def sec (h, m, s):
 
 # Calculate the memory aggressiveness metric
 def aggr (mib_orig, mib_mem, exec_time):
-    return (exec_time * mib_mem) / mib_orig
+    # return (exec_time * mib_mem) / mib_orig
+    return mib_mem / mib_orig
 
 # Calculate the memory effectiveness metric
 def eff (mib_orig, mib_mem, exec_time):
     # return mib_orig * exec_time / mib_mem
-    return mib_mem / (mib_orig * exec_time)
+    # return mib_mem / (mib_orig * exec_time)
+    return mib_orig / exec_time
 
 # Normalize the performance metrics
 # Each value is taken log_sed

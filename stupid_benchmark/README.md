@@ -187,13 +187,13 @@ I interrupted it and the last `test` was only 7% of the way into the file.
 ### Performance
 The performance metrics are:
 ```
-                        (execution time in seconds) * (MiB of memory used)
-memory aggressiveness = --------------------------------------------------
-                                      (MiB in original file)
+                         MiB of memory used
+memory aggressiveness = --------------------
+                        MiB in original file
 
-                                       (MiB of memory used)
-memory effectiveness = ----------------------------------------------------
-                       (MiB in original file) * (execution time in seconds)
+                          MiB in original file
+memory effectiveness = -------------------------
+                       execution time in seconds
 ```
 The resulting results are then normalized by dividing by `sed`'s values.
 These are some extremely un-scientific metrics and I have no idea how valid they actually are.
