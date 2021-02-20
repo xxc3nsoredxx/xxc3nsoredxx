@@ -196,7 +196,7 @@ They can also do a lot more than simple regex replace, but this benchmark isn't 
 Nano and Vim fail miserably, but that's unsurprising since they're arguably the wrong tool for the job.
 They're designed for editing text not bulk data processing.
 Vim's regex features are fantastic, and I use them a lot, but only in the context of normal text editing.
-An interesting thing to note is that Vim uses significantly less memory than Nano.
+An interesting thing to note is that Vim uses significantly less memory but does have slower regex replace than Nano.
 
 The tool I was most interested in, and the clear winner, is `sd`.
 It used _a lot_ of memory, but it also tore right through _a lot_ of data.
