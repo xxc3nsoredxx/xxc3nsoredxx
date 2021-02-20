@@ -213,6 +213,19 @@ Nonetheless, I feel like they give some idea to how aggressively each program as
 | 5.1 GiB aggressiveness | 0.8901 | nan   | 596.6 | 1.0 | nan    |           |
 | 5.1 GiB effectiveness  | 1.674  | nan   | 45089 | 1.0 | nan    |           |
 
+|                        | awk   | nano   | sd    | sed | vim    | vim (est) |
+|:-                      |:---   |:----   |:--    |:--- |:---    |:--------- |
+| 5 MiB aggressiveness   | 1.221 | 74.03  | nan   | 1.0 | 57.79  |           |
+| 5 MiB effectiveness    | 1.3   | 0.1733 | 6.5   | 1.0 | 0.0578 |           |
+| 50 MiB aggressiveness  | 1.221 | 728.8  | 156.9 | 1.0 | 561.2  |           |
+| 50 MiB effectiveness   | 1.667 | 0.3125 | 8.065 | 1.0 | 0.0093 |           |
+| 200 MiB aggressiveness | 1.221 | 2912   | 333.8 | 1.0 | 1649   | 2181      |
+| 200 MiB effectiveness  | 1.333 | 0.3390 | 10.0  | 1.0 | 0.0044 | 0.0033    |
+| 1 GiB aggressiveness   | 1.221 | nan    | 1064  | 1.0 | nan    |           |
+| 1 GiB effectiveness    | 1.338 | nan    | 8.583 | 1.0 | nan    |           |
+| 5.1 GiB aggressiveness | 1.221 | nan    | 5186  | 1.0 | nan    |           |
+| 5.1 GiB effectiveness  | 1.372 | nan    | 8.694 | 1.0 | nan    |           |
+
 |                        | awk  | nano | sd   | sed  | vim         | vim (est) |
 |:-                      |:---  |:---- |:--   |:---  |:---         |:--------- |
 | 5 MiB aggressiveness   | 0.939060939060939 | 427.07292707292703 | nan | 1.0 | 1000.2497502497502
@@ -225,6 +238,19 @@ Nonetheless, I feel like they give some idea to how aggressively each program as
 | 1 GiB effectiveness    | 1.6329903862371395 | nan | 9131.77489177489 | 1.0 | nan
 | 5.1 GiB aggressiveness | 0.8901043298074839 | nan | 596.5910898007372 | 1.0 | nan
 | 5.1 GiB effectiveness  | 1.6743002544529262 | nan | 45089.032258064515 | 1.0 | nan
+
+|                        | awk  | nano | sd   | sed  | vim         | vim (est) |
+|:-                      |:---  |:---- |:--   |:---  |:---         |:--------- |
+| 5 MiB aggressiveness   | 1.2207792207792207 | 74.02597402597402 | nan | 1.0 | 57.79220779220779
+| 5 MiB effectiveness    | 1.3 | 0.17333333333333334 | 6.5 | 1.0 | 0.05777777777777778
+| 50 MiB aggressiveness  | 1.2207792207792207 | 728.7688311688312 | 156.92467532467532 | 1.0 | 561.2051948051948
+| 50 MiB effectiveness   | 1.6666666666666667 | 0.3125 | 8.064516129032258 | 1.0 | 0.009276437847866418
+| 200 MiB aggressiveness | 1.2207792207792207 | 2912.415584415584 | 333.79740259740254 | 1.0 | 1649.0389610389611 | 2180.987012987013
+| 200 MiB effectiveness  | 1.3333333333333335 | 0.3389830508474576 | 10.0 | 1.0 | 0.0044444444444444444 | 0.003333333333333333
+| 1 GiB aggressiveness   | 1.2207792207792207 | nan | 1063.8961038961038 | 1.0 | nan
+| 1 GiB effectiveness    | 1.3376623376623378 | nan | 8.583333333333334 | 1.0 | nan
+| 5.1 GiB aggressiveness | 1.2207792207792207 | nan | 5186.493506493506 | 1.0 | nan
+| 5.1 GiB effectiveness  | 1.3715012722646311 | nan | 8.693548387096774 | 1.0 | nan
 
 
 <!-- link refs -->
