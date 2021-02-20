@@ -17,6 +17,7 @@ They're not perfect by any means, but I found it to be an interesting torture te
 All testing was done in bash.
 Runtime was collected using "real time" from bash's `time` command or approximated using the stopwatch on my phone.
 Memory usage was from the "Virtual Memory Size" column in `top(1)`.
+Not all of this memory was necessarily used, but it's what the process wanted, so I'm using it as a "worst case".
 
 ### Data
 The test itself is simple: create a file with a bunch of text and run a regerx replace on it.
@@ -112,22 +113,22 @@ Each step was timed on my phone.
 
 ### 200 MiB
 #### Runtime
-|         | awk | nano  | sd  | sed | vim        |
-|:-       |:--- |:----  |:--  |:--- |:---        |
-| Open    | --- | :10   | --- | --- | :04        |
-| Replace | --- | :42   | --- | --- | >1:15:00   |
-| Write   | --- | :07   | --- | --- | :03\*\*    |
-| Total   | :15 | :59\* | :02 | :20 | >1:15:00\* |
+|         | awk | nano  | sd  | sed | vim      | vim (est) |
+|:-       |:--- |:----  |:--  |:--- |:---      |:--------- |
+| Open    | --- | :10   | --- | --- | :04      |           |
+| Replace | --- | :42   | --- | --- | >1:15:00 |           |
+| Write   | --- | :07   | --- | --- | :03\*\*  |           |
+| Total   | :15 | :59\* | :02 | :20 | >1:15:00 | >1:40:00  |
 
 \* Does not account for time taken to enter the commands
 
 \*\* `:wq!` because replace was interrupted
 
 #### Memory Usage
-|               | awk     | nano    | sd       | sed     | vim       |
-|:-             |:---     |:----    |:--       |:---     |:---       |
-| After open    | ---     | 9.38 GiB| ---      | ---     | 643 MiB   |
-| After replace | 9.4 MiB | 21.9 GiB| 2.51 GiB | 7.7 MiB | >12.4 GiB |
+|               | awk     | nano    | sd       | sed     | vim       | vim (est) |
+|:-             |:---     |:----    |:--       |:---     |:---       |:--------- |
+| After open    | ---     | 9.38 GiB| ---      | ---     | 643 MiB   |           |
+| After replace | 9.4 MiB | 21.9 GiB| 2.51 GiB | 7.7 MiB | >12.4 GiB | >16.4 GiB |
 
 I left `vim` running while I went to go eat.
 Since it hadn't finished by the time I got back, I hit `C-c` to interrupt it.
@@ -195,62 +196,36 @@ memory aggressiveness = --------------------
 memory effectiveness = -------------------------
                        execution time in seconds
 ```
-The resulting results are then normalized by dividing by `sed`'s values.
-These are some extremely un-scientific metrics and I have no idea how valid they actually are.
-This was just done for fun and curiosity's sake.
-Nonetheless, I feel like they give some idea to how aggressively each program asks for memory and how effective that memory is at speeding up the regex replace (compared to `sed`).
+The results are then normalized by dividing by `sed`'s values.
+A higher value means more aggressive memory allocation and more effective memory use than `sed`, respectively.
 
-|                        | awk    | nano  | sd    | sed | vim    | vim (est) |
-|:-                      |:---    |:----  |:--    |:--- |:---    |:--------- |
-| 5 MiB aggressiveness   | 0.9391 | 427.1 | nan   | 1.0 | 1000   |           |
-| 5 MiB effectiveness    | 1.587  | 12.83 | nan   | 1.0 | 3.339  |           |
-| 50 MiB aggressiveness  | 0.7325 | 2332  | 19.46 | 1.0 | 60498  |           |
-| 50 MiB effectiveness   | 2.035  | 227.7 | 1266  | 1.0 | 5.206  |           |
-| 200 MiB aggressiveness | 0.9156 | 8592  | 33.38 | 1.0 | 371034 | 654296    |
-| 200 MiB effectiveness  | 1.628  | 987.3 | 3338  | 1.0 | 7.329  | 7.270     |
-| 1 GiB aggressiveness   | 0.9126 | nan   | 123.9 | 1.0 | nan    |           |
-| 1 GiB effectiveness    | 1.633  | nan   | 9132  | 1.0 | nan    |           |
-| 5.1 GiB aggressiveness | 0.8901 | nan   | 596.6 | 1.0 | nan    |           |
-| 5.1 GiB effectiveness  | 1.674  | nan   | 45089 | 1.0 | nan    |           |
+|                        | awk   | nano   | sd    | vim    | vim (est) |
+|:-                      |:---   |:----   |:--    |:---    |:--------- |
+| 5 MiB aggressiveness   | 1.221 | 74.03  | ???   | 57.79  |           |
+| 5 MiB effectiveness    | 1.3   | 0.1733 | 6.5   | 0.0578 |           |
+| 50 MiB aggressiveness  | 1.221 | 728.8  | 156.9 | 561.2  |           |
+| 50 MiB effectiveness   | 1.667 | 0.3125 | 8.065 | 0.0093 |           |
+| 200 MiB aggressiveness | 1.221 | 2912   | 333.8 | 1649   | 2181      |
+| 200 MiB effectiveness  | 1.333 | 0.3390 | 10.0  | 0.0044 | 0.0033    |
+| 1 GiB aggressiveness   | 1.221 | NaN    | 1064  | NaN    |           |
+| 1 GiB effectiveness    | 1.338 | NaN    | 8.583 | NaN    |           |
+| 5.1 GiB aggressiveness | 1.221 | NaN    | 5186  | NaN    |           |
+| 5.1 GiB effectiveness  | 1.372 | NaN    | 8.694 | NaN    |           |
 
-|                        | awk   | nano   | sd    | sed | vim    | vim (est) |
-|:-                      |:---   |:----   |:--    |:--- |:---    |:--------- |
-| 5 MiB aggressiveness   | 1.221 | 74.03  | nan   | 1.0 | 57.79  |           |
-| 5 MiB effectiveness    | 1.3   | 0.1733 | 6.5   | 1.0 | 0.0578 |           |
-| 50 MiB aggressiveness  | 1.221 | 728.8  | 156.9 | 1.0 | 561.2  |           |
-| 50 MiB effectiveness   | 1.667 | 0.3125 | 8.065 | 1.0 | 0.0093 |           |
-| 200 MiB aggressiveness | 1.221 | 2912   | 333.8 | 1.0 | 1649   | 2181      |
-| 200 MiB effectiveness  | 1.333 | 0.3390 | 10.0  | 1.0 | 0.0044 | 0.0033    |
-| 1 GiB aggressiveness   | 1.221 | nan    | 1064  | 1.0 | nan    |           |
-| 1 GiB effectiveness    | 1.338 | nan    | 8.583 | 1.0 | nan    |           |
-| 5.1 GiB aggressiveness | 1.221 | nan    | 5186  | 1.0 | nan    |           |
-| 5.1 GiB effectiveness  | 1.372 | nan    | 8.694 | 1.0 | nan    |           |
+### Conclusion
+Both `awk` and `sed` are extremely consistent.
+In the test configuration at least, they used the same amount of memory for their internal buffers no matter the size of the input data.
+They're standard tools available on pretty much any \*nix system.
+They run reasonably fast for reasonable loads.
+They can also do a lot more than simple regex replace, but this benchmark isn't testing that.
 
-|                        | awk  | nano | sd   | sed  | vim         | vim (est) |
-|:-                      |:---  |:---- |:--   |:---  |:---         |:--------- |
-| 5 MiB aggressiveness   | 0.939060939060939 | 427.07292707292703 | nan | 1.0 | 1000.2497502497502
-| 5 MiB effectiveness    | 1.587012987012987 | 12.831168831168831 | nan | 1.0 | 3.339105339105339
-| 50 MiB aggressiveness  | 0.7324675324675325 | 2332.06025974026 | 19.458659740259737 | 1.0 | 60497.92
-| 50 MiB effectiveness   | 2.0346320346320343 | 227.74025974025975 | 1265.5215751989945 | 1.0 | 5.205985109510155
-| 200 MiB aggressiveness | 0.9155844155844155 | 8591.625974025974 | 33.37974025974025 | 1.0 | 371033.7662337662 | 654296.1038961038
-| 200 MiB effectiveness  | 1.6277056277056277 | 987.259520140876 | 3337.9740259740256 | 1.0 | 7.329062049062049 | 7.269956709956709
-| 1 GiB aggressiveness   | 0.912621359223301 | nan | 123.94906064808977 | 1.0 | nan
-| 1 GiB effectiveness    | 1.6329903862371395 | nan | 9131.77489177489 | 1.0 | nan
-| 5.1 GiB aggressiveness | 0.8901043298074839 | nan | 596.5910898007372 | 1.0 | nan
-| 5.1 GiB effectiveness  | 1.6743002544529262 | nan | 45089.032258064515 | 1.0 | nan
+Nano and Vim fail miserably, but that's unsurprising since they're arguably the wrong tool for the job.
+They're designed for editing text not bulk data processing.
+Vim's regex replace feature is fantastic, and I use it a lot, but only in the context of normal text editing.
 
-|                        | awk  | nano | sd   | sed  | vim         | vim (est) |
-|:-                      |:---  |:---- |:--   |:---  |:---         |:--------- |
-| 5 MiB aggressiveness   | 1.2207792207792207 | 74.02597402597402 | nan | 1.0 | 57.79220779220779
-| 5 MiB effectiveness    | 1.3 | 0.17333333333333334 | 6.5 | 1.0 | 0.05777777777777778
-| 50 MiB aggressiveness  | 1.2207792207792207 | 728.7688311688312 | 156.92467532467532 | 1.0 | 561.2051948051948
-| 50 MiB effectiveness   | 1.6666666666666667 | 0.3125 | 8.064516129032258 | 1.0 | 0.009276437847866418
-| 200 MiB aggressiveness | 1.2207792207792207 | 2912.415584415584 | 333.79740259740254 | 1.0 | 1649.0389610389611 | 2180.987012987013
-| 200 MiB effectiveness  | 1.3333333333333335 | 0.3389830508474576 | 10.0 | 1.0 | 0.0044444444444444444 | 0.003333333333333333
-| 1 GiB aggressiveness   | 1.2207792207792207 | nan | 1063.8961038961038 | 1.0 | nan
-| 1 GiB effectiveness    | 1.3376623376623378 | nan | 8.583333333333334 | 1.0 | nan
-| 5.1 GiB aggressiveness | 1.2207792207792207 | nan | 5186.493506493506 | 1.0 | nan
-| 5.1 GiB effectiveness  | 1.3715012722646311 | nan | 8.693548387096774 | 1.0 | nan
+The tool I was most interested in, and the one I hadn't heard of until now, is `sd`.
+It used up _a lot_ of memory, but it also tore right through _a lot_ of data.
+I'm very impressed and definitely keeping this tool around.
 
 
 <!-- link refs -->

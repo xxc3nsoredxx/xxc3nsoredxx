@@ -12,13 +12,10 @@ def sec (h, m, s):
 
 # Calculate the memory aggressiveness metric
 def aggr (mib_orig, mib_mem, exec_time):
-    # return (exec_time * mib_mem) / mib_orig
     return mib_mem / mib_orig
 
 # Calculate the memory effectiveness metric
 def eff (mib_orig, mib_mem, exec_time):
-    # return mib_orig * exec_time / mib_mem
-    # return mib_mem / (mib_orig * exec_time)
     return mib_orig / exec_time
 
 # Normalize the performance metrics
@@ -26,9 +23,7 @@ def eff (mib_orig, mib_mem, exec_time):
 # sed is always at index 3
 def norm (perf):
     sed_a, sed_e = perf[3]
-    # return [(log(a,sed_a), log(e,sed_e)) for a,e in perf]
     return [(a/sed_a, e/sed_e) for a,e in perf]
-    # return [(log10(a/sed_a), log10(e/sed_e)) for a,e in perf]
 
 # (MiB used, execution time) for awk/nano/sd/sed/vim
 stats_5mib = [
