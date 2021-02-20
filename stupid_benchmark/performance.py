@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-from math import log, log10, nan
+from math import nan
 
 # Convert GiB to MiB
 def gib (g):
@@ -10,13 +10,10 @@ def gib (g):
 def sec (h, m, s):
     return h*3600 + m*60 + s
 
-# Calculate the memory aggressiveness metric
-def aggr (mib_orig, mib_mem, exec_time):
-    return mib_mem / mib_orig
-
-# Calculate the memory effectiveness metric
-def eff (mib_orig, mib_mem, exec_time):
-    return mib_orig / exec_time
+# Calculate the performance metrics
+# (aggressiveness, effectiveness)
+def perf (mib_orig, mib_mem, exec_time):
+    return (mib_mem/mib_orig, mib_orig/exec_time)
 
 # Normalize the performance metrics
 # Each value is taken log_sed
@@ -70,17 +67,17 @@ stats_51gib = [
 ]
 
 # (aggressiveness, effectiveness) for awk/nano/sd/sed/vim
-perf_5mib = [(aggr(5,*prog), eff(5,*prog)) for prog in stats_5mib]
-perf_50mib = [(aggr(50,*prog), eff(50,*prog)) for prog in stats_50mib]
-perf_200mib = [(aggr(200,*prog), eff(200,*prog)) for prog in stats_200mib]
-perf_1gib = [(aggr(gib(1),*prog), eff(gib(1),*prog)) for prog in stats_1gib]
-perf_51gib = [(aggr(gib(5.1),*prog), eff(gib(5.1),*prog)) for prog in stats_51gib]
+perf_5mib   = [perf(5,*prog)        for prog in stats_5mib]
+perf_50mib  = [perf(50,*prog)       for prog in stats_50mib]
+perf_200mib = [perf(200,*prog)      for prog in stats_200mib]
+perf_1gib   = [perf(gib(1),*prog)   for prog in stats_1gib]
+perf_51gib  = [perf(gib(5.1),*prog) for prog in stats_51gib]
 
-norm_5mib = norm(perf_5mib)
-norm_50mib = norm(perf_50mib)
+norm_5mib   = norm(perf_5mib)
+norm_50mib  = norm(perf_50mib)
 norm_200mib = norm(perf_200mib)
-norm_1gib = norm(perf_1gib)
-norm_51gib = norm(perf_51gib)
+norm_1gib   = norm(perf_1gib)
+norm_51gib  = norm(perf_51gib)
 
 print(f'{perf_5mib = }')
 print(f'{perf_50mib = }')
