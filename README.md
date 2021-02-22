@@ -25,6 +25,18 @@ I absolutely love that.
 ## too short; want more
 [A longer "about me"][about] for people who want more rambling in textual form.
 
+## Gentoo overlay
+It was only a matter of time until I came across some piece of software that wasn't available in the main Portage tree.
+
+To add the repo, run:
+```
+eselect repository add unc3nsored git https://github.com/xxc3nsoredxx/unc3nsored.git
+emaint sync -r unc3nsored
+```
+[Currently waiting to be listed on overlays.gentoo.org][ogo pr]
+
+[Link to overlay][unc3nsored]
+
 ## Random things I did
 [Setting up Yubikey for Linux 2FA login][yubikey]
 &mdash; See also: [Gentoo Wiki page][yubikey gentoo wiki] where I wrote up a more detailed set of instructions.
@@ -37,6 +49,8 @@ I absolutely love that.
 
 <!-- link refs -->
 [about]: ABOUT.md
+[ogo pr]: https://github.com/gentoo/api-gentoo-org/pull/372
+[unc3nsored]: https://github.com/xxc3nsoredxx/unc3nsored
 [yubikey]: yubikey_linux_2fa/
 [yubikey gentoo wiki]: https://wiki.gentoo.org/wiki/YubiKey
 [stupid benchmark]: stupid_benchmark/
