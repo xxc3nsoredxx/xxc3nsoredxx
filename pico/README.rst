@@ -16,6 +16,33 @@ Requirements
 #. ... a bit of luck
 
 
+Sanity check
+============
+
+The simplest way to program the Pico is by mounting it in mass-storage mode and
+dropping a binary into it. For our sanity check, let's just see if we can mount
+it at all. Grab the Pico, hold down the BOOTSEL button, and plug it into your
+USB port.
+
+::
+    
+    # lsblk
+    NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+    sda           8:0    1   128M  0 disk 
+    `-sda1        8:1    1   128M  0 part 
+    # mount /dev/sda1 /mnt
+    # ls -alF /mnt
+    total 24
+    drwxr-xr-x. 2 root root 16384 Dec 31  1969 ./
+    drwxr-xr-x. 1 root root   142 Feb 26  2021 ../
+    -r-xr-xr-x. 1 root root   241 Sep  5  2008 INDEX.HTM*
+    -r-xr-xr-x. 1 root root    62 Sep  5  2008 INFO_UF2.TXT*
+
+Success! Although it is strange that it shows up as a 128 MiB disk even though
+it only has 2 MiB of flash according to the specs... Should be fine since the
+contents are as expected.
+
+
 Creating the toolchain
 ======================
 
