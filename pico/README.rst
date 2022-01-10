@@ -114,7 +114,6 @@ to ``/var/tmp``::
 We should also fix ``/usr/arm-none-eabi/etc/portage/make.conf`` to include the
 following::
     
-    ARCH="arm"
     CFLAGS="-O2 -pipe -fomit-frame-pointer -march=armv6-m -mtune=cortex-m0plus -mthumb"
     MAKEOPTS="-j16"
     FEATURES="-collision-protect candy ipc-sandbox network-sandbox noman noinfo nodoc parallel-fetch parallel-install preserve-libs sandbox userfetch userpriv usersandbox usersync"
@@ -125,6 +124,19 @@ Thumb mode. This options tells GCC to only spit out code using the Thumb
 instruction set. Set ``-jN`` to a suitable value for your system. I have a
 Ryzen 7 with 8c/16t. See `make.conf(5)`_ for a description of the ``FEATURES``.
 
+Two other files to fix are ``/usr/arm-none-eabi/etc/portage/profile/make.defaults``
+and ``/usr/arm-none-eabi/etc/portage/profile/use.force``. They contain obnoxious
+kernel placeholders which break the build and which we need to remove.
+``make.defaults`` should look something like this::
+    
+    ARCH="arm"
+    KERNEL="-linux"
+    ELIBC="newlib"
+
+and ``use.force`` should look something like this::
+    
+    -kernel_linux
+
 
 Building our shit
 -----------------
@@ -133,12 +145,11 @@ The time has come. Let's create the toolchain. Thanks to the setup we did
 above, it's as easy as::
     
     # crossdev  --target arm-none-eabi  \
-                --stage3                \
+                --stage4                \
                 --portage -a --portage -v
 
-Not a single ``./configure && make && make install`` was punched in, wowza!
-
-
+Not a single ``./configure && make && make install`` was punched in. And Portage
+will handle updating the toolchain automatically, wowza!
 
 If you don't think you're up for doing all this by hand, then I've written up `a
 script`_ which Works On My Machine (TM) and handles all of the heavy lifting. In
@@ -151,8 +162,12 @@ Resources
 =========
 
 #. `Getting Started with Raspberry Pi Pico`_
+#. `Raspberry Pi Pico C/C++ SDK`_
 #. `crossdev`_
 #. `Portage repositories`_
 
 .. _Getting Started with Raspberry Pi Pico:
-   https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf
+    https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf
+
+.. _Raspberry Pi Pico C/C++ SDK:
+    https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-c-sdk.pdf
