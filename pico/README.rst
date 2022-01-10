@@ -163,6 +163,7 @@ Resources
 
 #. `Getting Started with Raspberry Pi Pico`_
 #. `Raspberry Pi Pico C/C++ SDK`_
+#. `Arm Cortex-M0+`_
 #. `crossdev`_
 #. `Portage repositories`_
 
@@ -178,5 +179,11 @@ Resources
 .. _Raspberry Pi Pico C/C++ SDK:
     https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-c-sdk.pdf
 
+.. _Arm Cortex-M0+:
+    https://developer.arm.com/ip-products/processors/cortex-m/cortex-m0-plus
+
 .. _crossdev:
     https://wiki.gentoo.org/wiki/Crossdev
+
+.. _Portage repositories:
+    https://wiki.gentoo.org/wiki/Repository_format
