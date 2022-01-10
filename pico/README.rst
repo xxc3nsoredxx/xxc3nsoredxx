@@ -166,8 +166,17 @@ Resources
 #. `crossdev`_
 #. `Portage repositories`_
 
+.. _GCC docs:
+    https://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html
+
+.. _make.conf(5):
+    https://dev.gentoo.org/~zmedico/portage/doc/man/make.conf.5.html
+
 .. _Getting Started with Raspberry Pi Pico:
     https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf
 
 .. _Raspberry Pi Pico C/C++ SDK:
     https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-c-sdk.pdf
+
+.. _crossdev:
+    https://wiki.gentoo.org/wiki/Crossdev
