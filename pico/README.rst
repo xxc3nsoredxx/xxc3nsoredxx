@@ -195,13 +195,52 @@ Like with ``crossdev``, this has the nice benefit of Portage handling keeping
 things up to date. Although now the burden is on me to tell Portage when an
 update exists...
 
+
+Code Examples
+=============
+
 Now that all of that is out of the way, we can mostly follow the official
-guide from here on out.
+guide from here on out. There are still a few important deviations, but those
+will be pointed out where appropriate. This section assumes you're in the
+``examples/`` directory (or local equivalent).
+
+
+Setting up the build environment
+--------------------------------
+
+The upstream repo contains the following towards the top of the project root
+``CMakeLists.txt``:
+
+.. code:: CMake
+
+    # Pull in SDK (must be before project)
+    include(pico_sdk_import.cmake)
+
+This assumes that the upstream repo has been cloned into the project root or
+that ``PICO_SDK_PATH`` has been defined as an environment variable. Since we
+installed the SDK system-wide, this has been changed to:
+
+.. code:: CMake
+
+    # Pull in SDK (must be before project)
+    find_package(pico-sdk config)
+
+Now we can create the build environment::
+    
+    $ mkdir build
+    $ cd build
+    $ cmake ..
+
+The benefits of an out-of-tree build are that it doesn't clutter the source
+tree with build files. If you want to reset, you can just delete ``build/`` and
+recreate it as above.
 
 
 Blinking an LED in C
-====================
+--------------------
 
+This is the pre-Hello World example which just binks the onboard LED in the
+pico. Nothing fancy, but a great sanity check for the toolchain.
 
 .. code:: C
    :number-lines:
@@ -231,6 +270,10 @@ Blinking an LED in C
     }
 
 
+Building blink
+--------------
+
+
 License
 =======
 
@@ -243,6 +286,7 @@ Resources
 
 #. `Getting Started with Raspberry Pi Pico`_
 #. `Raspberry Pi Pico C/C++ SDK`_
+#. `Raspberry Pi Pico examples`_
 #. `Arm Cortex-M0+`_
 #. `crossdev`_
 #. `Portage repositories`_
@@ -268,6 +312,9 @@ Resources
 
 .. _Raspberry Pi Pico C/C++ SDK:
     https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-c-sdk.pdf
+
+.. _Raspberry Pi Pico examples:
+    https://github.com/raspberrypi/pico-examples
 
 .. _Arm Cortex-M0+:
     https://developer.arm.com/ip-products/processors/cortex-m/cortex-m0-plus
