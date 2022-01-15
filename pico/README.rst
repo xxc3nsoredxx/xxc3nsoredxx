@@ -12,7 +12,11 @@ Requirements
 
 #. Raspberry Pi Pico (duh)
 #. Gentoo
-#. ``sys-devel/crossdev``
+#. ``>sys-devel/crossdev-20211121``
+
+   - Versions ``20211121`` and earlier may require `this patch`_. See `#831165`_
+     for more details.
+
 #. ... a bit of luck
 
 
@@ -158,6 +162,7 @@ tweaked the script as I went along.
 
 Ok, ``crossdev`` does the heavy lifting...
 
+
 Resources
 =========
 
@@ -166,6 +171,13 @@ Resources
 #. `Arm Cortex-M0+`_
 #. `crossdev`_
 #. `Portage repositories`_
+
+.. _This patch:
+.. _crossdev bug fix:
+    0001-crossdev-use-package.use.-mask-force-for-pie-ssp.patch
+
+.. _#831165:
+    https://bugs.gentoo.org/831165
 
 .. _GCC docs:
     https://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html
