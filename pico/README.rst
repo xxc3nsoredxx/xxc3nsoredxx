@@ -203,6 +203,13 @@ Blinking an LED in C
 ====================
 
 
+License
+=======
+
+All of the Raspberry Pi Pico example code is Copyright by Raspberry Pi
+(Trading) Ltd. and released under the BSD 3 clause license.
+
+
 Resources
 =========
 
