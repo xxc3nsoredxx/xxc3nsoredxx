@@ -17,6 +17,7 @@ Requirements
    - Versions ``20211121`` and earlier may require `this patch`_. See `#831165`_
      for more details.
 
+#. ``app-eselect/eselect-repository``
 #. ... a bit of luck
 
 
@@ -163,6 +164,45 @@ tweaked the script as I went along.
 Ok, ``crossdev`` does the heavy lifting...
 
 
+Installing the SDK
+==================
+
+The next step is to install the Pico SDK. The official guide has you clone the
+repo. But I've written an ebuild to install the SDK onto the system. So let's
+use that instead, shall we?
+
+
+Adding my overlay
+-----------------
+
+The ebuild is hosted in the unc3nsored_ overlay. If it's not already added (and
+let's be real, who'd've added it up until this point), do the following to add
+and sync the ebuilds::
+    
+    # eselect repository enable unc3nsored
+    # emaint sync -r unc3nsored
+
+
+Installing the SDK (for real this time)
+---------------------------------------
+
+With the overlay added, installation is as simple as adding the package into
+your ``package.accept_keywords/`` and running::
+    
+    # emerge --ask dev-libs/pico-sdk
+
+Like with ``crossdev``, this has the nice benefit of Portage handling keeping
+things up to date. Although now the burden is on me to tell Portage when an
+update exists...
+
+Now that all of that is out of the way, we can mostly follow the official
+guide from here on out.
+
+
+Blinking an LED in C
+====================
+
+
 Resources
 =========
 
@@ -184,6 +224,9 @@ Resources
 
 .. _make.conf(5):
     https://dev.gentoo.org/~zmedico/portage/doc/man/make.conf.5.html
+
+.. _unc3nsored:
+    https://github.com/xxc3nsoredxx/unc3nsored
 
 .. _Getting Started with Raspberry Pi Pico:
     https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf
