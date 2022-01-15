@@ -223,7 +223,7 @@ installed the SDK system-wide, this has been changed to:
 .. code:: CMake
 
     # Pull in SDK (must be before project)
-    find_package(pico-sdk config)
+    find_package(pico-sdk CONFIG)
 
 Now we can create the build environment::
     
@@ -270,8 +270,37 @@ pico. Nothing fancy, but a great sanity check for the toolchain.
     }
 
 
-Building blink
---------------
+Building and running blink
+--------------------------
+
+You may notice that CMake has pulled the required SDK files into ``build/``. To
+build ``blink`` just do the following::
+    
+    $ cd build/blink
+    $ make -j16
+
+This will build not just ``blink.c``, but also the necessary tooling to create
+a bootable image. Just like when setting the ``MAKEOPTS`` for the
+``cross-arm-none-eabi`` overlay, use a value for the number of ``make`` jobs
+that is appropriate for your system.
+
+To install the image onto the Pico, mount it in mass-storage mode just like when
+doing the initial sanity check and just copy it over.
+
+::
+    
+    # lsblk
+    NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+    sda           8:0    1   128M  0 disk 
+    `-sda1        8:1    1   128M  0 part 
+    # mount /dev/sda1 /mnt
+    # cp blink.uf2 /mnt
+    # umount /mnt
+
+Copying ``blink.uf2`` onto the Pico will automatically detach it from the USB
+port and reboot. When it's booted, the onboard LED should be blinking on and
+off every 1/4 second. Since it's detached, unmounting won't do anything beyond
+cleaning up after the old mount. This is a good thing to do though.
 
 
 License
