@@ -18,6 +18,8 @@ Requirements
      for more details.
 
 #. ``app-eselect/eselect-repository``
+#. ``net-dialup/minicom``
+#. USB UART (3.3V)
 #. ... a bit of luck
 
 
@@ -196,7 +198,57 @@ things up to date. Although now the burden is on me to tell Portage when an
 update exists...
 
 
-Code Examples
+Setting up for serial I/O
+=========================
+
+Because serial I/O is cool as *heck*.
+
+
+Hardware prep
+-------------
+
+The Pico's default pins are:
+
+- Pin 1 - UART0 TX (top left)
+- Pin 2 - UART0 RX
+- Pin 3 - GND
+
+This means that the TX pin on the USB UART should connect to Pin 2 on the Pico,
+the RX pin to Pin 1, and the ground pin to Pin 3. Soldering the headers onto the
+Pico and placing it onto a breadboard may make this easier.
+
+
+Local machine prep
+------------------
+
+(At least) the following kernel options need to be set. Depending your UART
+device, you may need to set additional options.
+
+- ``CONFIG_USB_SERIAL``
+- ``CONFIG_USB_SERIAL_CONSOLE``
+- ``CONFIG_USB_SERIAL_GENERIC``
+- ``CONFIG_USB_SERIAL_SIMPLE``
+
+::
+    
+    Device Drivers  --->
+       [*] USB support  --->
+          <M>   USB Serial Converter support  --->
+             --- USB Serial Converter support
+             [*]   USB Serial Console device support
+             [*]   USB Generic Serial Driver
+             <M>   USB Serial Simple Driver
+
+Unless you always want to run as root, your user needs to be in the ``dialout``
+group to access the serial lines::
+    
+    # usermod -aG dialout user
+
+If you had to rebuild your kernel, reboot. If you only had to add your user to
+``dialout``, log out and log back in for it to take effect.
+
+
+Code examples
 =============
 
 Now that all of that is out of the way, we can mostly follow the official
@@ -303,6 +355,61 @@ off every 1/4 second. Since it's detached, unmounting won't do anything beyond
 cleaning up after the old mount. This is a good thing to do though.
 
 
+Hello World (serial)
+--------------------
+
+A "proper" Hello World example. This code prints "Hello, world!" onto serial out
+every second.
+
+.. code:: C
+   :number-lines:
+
+    /**
+     * Copyright (c) 2020 Raspberry Pi (Trading) Ltd.
+     *
+     * SPDX-License-Identifier: BSD-3-Clause
+     */
+    
+    #include <stdio.h>
+    #include "pico/stdlib.h"
+    
+    int main() {
+        stdio_init_all();
+        while (true) {
+            printf("Hello, world!\n");
+            sleep_ms(1000);
+        }
+        return 0;
+    }
+
+
+Building and running hello_serial
+---------------------------------
+
+Building and running ``hello_serial`` is basically the same as ``blink``::
+    
+    $ cd build/hello_world/serial
+    $ make -j16
+
+Installing is also basically the same::
+    
+    # mount /dev/sda1 /mnt
+    # cp hello_serial.uf2 /mnt
+    # umount /mnt
+
+To see the output, plug in the USB UART as well. If your machine is configured
+correctly, you should find ``/dev/ttyUSB0``. This is the serial line we need to
+connect to::
+    
+    $ minicom -b 115200 -D /dev/ttyUSB0
+    Hello, world!
+    Hello, world!
+    Hello, world!
+    ...
+
+To exit, hit ``Ctrl-A X``.
+
+
 License
 =======
 
@@ -314,6 +421,7 @@ Resources
 =========
 
 #. `Getting Started with Raspberry Pi Pico`_
+#. `Raspberry Pi Pico datasheet`_
 #. `Raspberry Pi Pico C/C++ SDK`_
 #. `Raspberry Pi Pico examples`_
 #. `Arm Cortex-M0+`_
@@ -338,6 +446,9 @@ Resources
 
 .. _Getting Started with Raspberry Pi Pico:
     https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf
+
+.. _Raspberry Pi Pico datasheet:
+    https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf
 
 .. _Raspberry Pi Pico C/C++ SDK:
     https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-c-sdk.pdf
