@@ -73,7 +73,7 @@ The basic structure we need to create::
     +- etc/
     |  +- portage/
     |     +- repos.conf/
-    |        +- cross-armv-none-eabi.conf
+    |        +- cross-arm-none-eabi.conf
     +- var/
        +- db/
           +- repos/
@@ -177,18 +177,26 @@ use that instead, shall we?
 Adding my overlay
 -----------------
 
-The ebuild is hosted in the unc3nsored_ overlay. If it's not already added (and
-let's be real, who'd've added it up until this point), do the following to add
-and sync the ebuilds::
+The ebuilds are hosted in the unc3nsored_ overlay. If it's not already added
+(and let's be real, who'd've added it up until this point), do the following to
+add and sync the ebuilds::
     
     # eselect repository enable unc3nsored
     # emaint sync -r unc3nsored
+
+Specifically, there's two packages which are relevant:
+
+#. ``dev-libs/pico-sdk``
+#. ``dev-libs/tinyusb``
+
+   - Automatically pulled in as a dependency when the ``usb`` USE flag is
+     enabled on the above (enabled by default).
 
 
 Installing the SDK (for real this time)
 ---------------------------------------
 
-With the overlay added, installation is as simple as adding the package into
+With the overlay added, installation is as simple as adding the package(s) into
 your ``package.accept_keywords/`` and running::
     
     # emerge --ask dev-libs/pico-sdk
@@ -222,7 +230,7 @@ Local machine prep
 ------------------
 
 (At least) the following kernel options should be set. Depending your USB UART
-device, you may need to set additional options.
+device, you may need to set additional options:
 
 - ``CONFIG_USB_ACM``
 - ``CONFIG_USB_SERIAL``
@@ -294,7 +302,7 @@ Blinking an LED in C
 --------------------
 
 This is the pre-Hello World example which just binks the onboard LED in the
-pico. Nothing fancy, but a great sanity check for the toolchain.
+Pico. Nothing fancy, but a great sanity check for the toolchain.
 
 .. code:: C
    :number-lines:
@@ -400,8 +408,8 @@ Installing is also basically the same::
     # umount /mnt
 
 To see the output, plug in the USB UART as well. If your machine is configured
-correctly, you should find ``/dev/ttyUSB0``. This is the serial line we need to
-connect to::
+correctly, you should find a brand new ``/dev/ttyUSB0``. This is the serial line
+we need to connect to::
     
     $ minicom -b 115200 -D /dev/ttyUSB0
     Hello, world!
@@ -441,8 +449,8 @@ output instead of the UART.
 
 The astute among you may notice some similarities with the previous example. If
 you didn't catch it, they're the same code. This is because the output can be
-directed to either UART or USB (or possinly both) at compile time. This is the
-relevant part of the ``CMakeLists.txt``:
+directed to either UART or USB (or possibly both) at compile time. UART is the
+default. This is the relevant part of the ``CMakeLists.txt``:
 
 .. code:: CMake
 
@@ -464,6 +472,23 @@ on that serial line::
     Hello, world!
     Hello, world!
     ...
+
+
+SWD
+===
+
+This guide doesn't cover using SWD to debug or flash the Pico. Mainly because
+the pins are at the bottom, which is a rather unfortunate location since I can't
+pull them out without either a clip or soldering wires to them. Maybe in the
+future, but this is currently an indefinite TODO.
+
+The following chapters in the official "Getting Started" guide are relevant:
+
+- Chapter 5: Flash Programming with SWD
+- Chapter 6: Debugging with SWD
+- Appendix A: Using Picoprobe
+
+  - Instructions on using a second Pico as a debug probe.
 
 
 License
