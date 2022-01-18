@@ -221,9 +221,10 @@ Pico and placing it onto a breadboard may make this easier.
 Local machine prep
 ------------------
 
-(At least) the following kernel options need to be set. Depending your UART
+(At least) the following kernel options should be set. Depending your USB UART
 device, you may need to set additional options.
 
+- ``CONFIG_USB_ACM``
 - ``CONFIG_USB_SERIAL``
 - ``CONFIG_USB_SERIAL_CONSOLE``
 - ``CONFIG_USB_SERIAL_GENERIC``
@@ -233,6 +234,7 @@ device, you may need to set additional options.
     
     Device Drivers  --->
        [*] USB support  --->
+          <M>   USB Modem (CDC ACM) support
           <M>   USB Serial Converter support  --->
              --- USB Serial Converter support
              [*]   USB Serial Console device support
@@ -355,11 +357,11 @@ off every 1/4 second. Since it's detached, unmounting won't do anything beyond
 cleaning up after the old mount. This is a good thing to do though.
 
 
-Hello World (serial)
---------------------
+Hello World (UART)
+------------------
 
-A "proper" Hello World example. This code prints "Hello, world!" onto serial out
-every second.
+A "proper" Hello World example. This code prints "Hello, world!" onto UART once
+every second. This is ``hello_serial`` in the upstream repo.
 
 .. code:: C
    :number-lines:
@@ -383,18 +385,18 @@ every second.
     }
 
 
-Building and running hello_serial
----------------------------------
+Building and running hello_uart
+-------------------------------
 
-Building and running ``hello_serial`` is basically the same as ``blink``::
+Building and running ``hello_uart`` is basically the same as ``blink``::
     
-    $ cd build/hello_world/serial
+    $ cd build/hello_world/uart
     $ make -j16
 
 Installing is also basically the same::
     
     # mount /dev/sda1 /mnt
-    # cp hello_serial.uf2 /mnt
+    # cp hello_uart.uf2 /mnt
     # umount /mnt
 
 To see the output, plug in the USB UART as well. If your machine is configured
@@ -408,6 +410,60 @@ connect to::
     ...
 
 To exit, hit ``Ctrl-A X``.
+
+
+Hello World (USB)
+-----------------
+
+Another "proper" Hello World, but this time we're using the Pico's USB serial
+output instead of the UART.
+
+.. code:: C
+   :number-lines:
+
+    /**
+     * Copyright (c) 2020 Raspberry Pi (Trading) Ltd.
+     *
+     * SPDX-License-Identifier: BSD-3-Clause
+     */
+    
+    #include <stdio.h>
+    #include "pico/stdlib.h"
+    
+    int main() {
+        stdio_init_all();
+        while (true) {
+            printf("Hello, world!\n");
+            sleep_ms(1000);
+        }
+        return 0;
+    }
+
+The astute among you may notice some similarities with the previous example. If
+you didn't catch it, they're the same code. This is because the output can be
+directed to either UART or USB (or possinly both) at compile time. This is the
+relevant part of the ``CMakeLists.txt``:
+
+.. code:: CMake
+
+    # enable usb output, disable uart output
+    pico_enable_stdio_usb(hello_usb 1)
+    pico_enable_stdio_uart(hello_usb 0)
+
+
+Building and running hello_usb
+------------------------------
+
+This is so similar to the above that I won't even bother writing the build
+instructions. The only part that's different is getting the output. It is most
+likely going to be on ``/dev/ttyACM0``, unless you happen to have something else
+on that serial line::
+    
+    $ minicom -b 115200 -D /dev/ttyACM0
+    Hello, world!
+    Hello, world!
+    Hello, world!
+    ...
 
 
 License
