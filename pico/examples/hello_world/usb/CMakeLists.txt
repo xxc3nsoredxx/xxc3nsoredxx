@@ -12,9 +12,6 @@ if (TARGET tinyusb_device)
 
     # create map/bin/hex/uf2 file etc.
     pico_add_extra_outputs(hello_usb)
-
-    # add url via pico_set_program_url
-    #example_auto_set_url(hello_usb)
 elseif(PICO_ON_DEVICE)
     message(WARNING "not building hello_usb because TinyUSB submodule is not initialized in the SDK")
 endif()

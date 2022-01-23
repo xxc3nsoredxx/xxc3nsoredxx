@@ -666,7 +666,7 @@ Resources
 
 .. _This patch:
 .. _crossdev bug fix:
-    0001-crossdev-use-package.use.-mask-force-for-pie-ssp.patch
+    misc/0001-crossdev-use-package.use.-mask-force-for-pie-ssp.patch
 
 .. _#831165:
     https://bugs.gentoo.org/831165
