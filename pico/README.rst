@@ -677,6 +677,10 @@ Resources
 .. _make.conf(5):
     https://dev.gentoo.org/~zmedico/portage/doc/man/make.conf.5.html
 
+.. _a script:
+.. _pico toolchain script:
+    https://github.com/xxc3nsoredxx/misc-utils/blob/master/cross_pico/cross_pico.sh
+
 .. _unc3nsored:
     https://github.com/xxc3nsoredxx/unc3nsored
 
