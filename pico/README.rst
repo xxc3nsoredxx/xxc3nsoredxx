@@ -474,6 +474,158 @@ on that serial line::
     ...
 
 
+Dual USB mass storage
+---------------------
+
+This is a much more interesting bit of code which comes from TinyUSB's own set
+of examples. It emulates *two* mass storage class devices using the Pico. If you
+don't know what that is by name alone think flash drives, external hard drives,
+anything that is bulk storage and is connected via USB.
+
+The code is also much longer than the previous examples, so I'm not going to
+copypasta it here. The source files can be found in `the examples directory`_,
+and I recommend you check them out:
+
+- ``main.c`` -- contains the main loop and code for blinking the LED
+- ``msc_disk_dual.c`` -- contains the binary blobs representing the disks and
+  the code to handle the required USB protocol
+- ``tusb_config.h`` -- contains some constants used by TinyUSB
+- ``usb_descriptors.c`` -- contains the structures used to describe the USB
+  device and the code to handle device description requests
+
+I made a few small changes to the upstream example:
+
+- Made the contents of the files a bit more clear as to which device they're on
+- Replaced DOS with Unix line endings and added a terminating newline
+- Made the ``CMakeLists.txt`` work with our Pico SDK setup
+
+
+Local machine prep (optional, but recommended)
+----------------------------------------------
+
+This example emulates two MBR disks with FAT12 formatted file systems. In order
+to get the most out of it, the following kernel options should be set:
+
+- ``CONFIG_BLOCK``
+- ``CONFIG_MSDOS_FS``
+- ``CONFIG_MSDOS_PARTITION``
+- ``CONFIG_PARTITION_ADVANCED``
+- ``CONFIG_VFAT_FS``
+
+::
+    
+    [*] Enable the block layer  --->
+           Partition Types  --->
+              [*] Advanced partition selection
+              [*]   PC BIOS (MSDOS partition tables) support
+        File systems  --->
+           DOS/FAT/EXFAT/NT Filesystems  --->
+              <M> MSDOS fs support
+              <M> VFAT (Windows-95) fs support
+
+Rebuild the kernel and reboot if needed.
+
+
+Building and running msc_dual_lun
+---------------------------------
+
+Building ``msc_dual_lun`` is basically the same as all the others::
+    
+    $ cd build/msc_dual_lun
+    $ make -j16
+
+This time when installing we want to be quick about cleaning up the mounts::
+    
+    # mount /dev/sda1 /mnt && cp msc_dual_lun.uf2 /mnt && umount /mnt
+
+While the Pico reboots, you should see something similar to this appear in
+``dmesg``:
+
+.. code:: dmesg
+
+    kern  :info  : [Jan22 18:35] usb 2-2: USB disconnect, device number 6
+    kern  :info  : [  +0.292318] usb 2-2: new full-speed USB device number 7 using xhci_hcd
+    kern  :info  : [  +0.155334] usb 2-2: New USB device found, idVendor=cafe, idProduct=4002, bcdDevice= 1.00
+    kern  :info  : [  +0.000013] usb 2-2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+    kern  :info  : [  +0.000004] usb 2-2: Product: TinyUSB Device
+    kern  :info  : [  +0.000003] usb 2-2: Manufacturer: TinyUSB
+    kern  :info  : [  +0.000003] usb 2-2: SerialNumber: 123456789012
+    kern  :info  : [  +0.001786] usb-storage 2-2:1.0: USB Mass Storage device detected
+    kern  :info  : [  +0.000770] scsi host0: usb-storage 2-2:1.0
+    kern  :info  : [  +1.024797] scsi host0: scsi scan: INQUIRY result too short (5), using 36
+    kern  :notice: [  +0.000019] scsi 0:0:0:0: Direct-Access     TinyUSB  Mass Storage     1.0  PQ: 0 ANSI: 2
+    kern  :notice: [  +0.000556] scsi 0:0:0:1: Direct-Access     TinyUSB  Mass Storage     1.0  PQ: 0 ANSI: 2
+    kern  :notice: [  +0.000836] sd 0:0:0:0: [sda] 16 512-byte logical blocks: (8.19 kB/8.00 KiB)
+    kern  :notice: [  +0.000299] sd 0:0:0:1: [sdb] 16 512-byte logical blocks: (8.19 kB/8.00 KiB)
+    kern  :notice: [  +0.000651] sd 0:0:0:0: [sda] Write Protect is off
+    kern  :debug : [  +0.000005] sd 0:0:0:0: [sda] Mode Sense: 03 00 00 00
+    kern  :err   : [  +0.001990] sd 0:0:0:0: [sda] No Caching mode page found
+    kern  :err   : [  +0.000006] sd 0:0:0:0: [sda] Assuming drive cache: write through
+    kern  :notice: [  +0.002010] sd 0:0:0:1: [sdb] Write Protect is off
+    kern  :debug : [  +0.000010] sd 0:0:0:1: [sdb] Mode Sense: 03 00 00 00
+    kern  :err   : [  +0.001999] sd 0:0:0:1: [sdb] No Caching mode page found
+    kern  :err   : [  +0.000004] sd 0:0:0:1: [sdb] Assuming drive cache: write through
+    kern  :info  : [  +0.008501]  sda:
+    kern  :notice: [  +0.006497] sd 0:0:0:0: [sda] Attached SCSI removable disk
+    kern  :info  : [  +0.003955]  sdb:
+    kern  :notice: [  +0.004031] sd 0:0:0:1: [sdb] Attached SCSI removable disk
+
+To view the contents of one of them, run::
+    
+    # mount /dev/sda /mnt
+    # ls -alF /mnt
+    total 1
+    drwxr-xr-x. 2 root root 512 Dec 31  1969 ./
+    drwxr-xr-x. 1 root root 142 Feb 26  2021 ../
+    -rwxr-xr-x. 1 root root 168 Nov  5  2013 README0.TXT*
+    # cat /mnt/README0.TXT
+    LUN0: This is the first mass storage device in tinyusb's MSC demo.
+    
+    If you find any bugs or get any questions, feel free to file an issue
+    at github.com/hathach/tinyusb
+    # umount /mnt
+
+**Note:** Even if they don't show as having any partitions, mounting the raw
+disk itself should work just fine.
+
+If you opted to not set up MBR and FAT support in your kernel, you can still
+view the contents by running::
+    
+    # dd if=/dev/sda bs=512 count=4 status=none | hexdump -C
+    00000000  eb 3c 90 4d 53 44 4f 53  35 2e 30 00 02 01 01 00  |.<.MSDOS5.0.....|
+    00000010  01 10 00 10 00 f8 01 00  01 00 01 00 00 00 00 00  |................|
+    00000020  00 00 00 00 80 00 29 34  12 00 00 54 69 6e 79 55  |......)4...TinyU|
+    00000030  53 42 20 30 20 20 46 41  54 31 32 20 20 20 00 00  |SB 0  FAT12   ..|
+    00000040  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+    *
+    000001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa  |..............U.|
+    00000200  f8 ff ff ff 0f 00 00 00  00 00 00 00 00 00 00 00  |................|
+    00000210  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+    *
+    00000400  54 69 6e 79 55 53 42 20  30 20 20 08 00 00 00 00  |TinyUSB 0  .....|
+    00000410  00 00 00 00 00 00 4f 6d  65 43 00 00 00 00 00 00  |......OmeC......|
+    00000420  52 45 41 44 4d 45 30 20  54 58 54 20 00 c6 52 6d  |README0 TXT ..Rm|
+    00000430  65 43 65 43 00 00 88 6d  65 43 02 00 a8 00 00 00  |eCeC...meC......|
+    00000440  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+    *
+    00000600  4c 55 4e 30 3a 20 54 68  69 73 20 69 73 20 74 68  |LUN0: This is th|
+    00000610  65 20 66 69 72 73 74 20  6d 61 73 73 20 73 74 6f  |e first mass sto|
+    00000620  72 61 67 65 20 64 65 76  69 63 65 20 69 6e 20 74  |rage device in t|
+    00000630  69 6e 79 75 73 62 27 73  20 4d 53 43 20 64 65 6d  |inyusb's MSC dem|
+    00000640  6f 2e 0a 0a 49 66 20 79  6f 75 20 66 69 6e 64 20  |o...If you find |
+    00000650  61 6e 79 20 62 75 67 73  20 6f 72 20 67 65 74 20  |any bugs or get |
+    00000660  61 6e 79 20 71 75 65 73  74 69 6f 6e 73 2c 20 66  |any questions, f|
+    00000670  65 65 6c 20 66 72 65 65  20 74 6f 20 66 69 6c 65  |eel free to file|
+    00000680  20 61 6e 20 69 73 73 75  65 0a 61 74 20 67 69 74  | an issue.at git|
+    00000690  68 75 62 2e 63 6f 6d 2f  68 61 74 68 61 63 68 2f  |hub.com/hathach/|
+    000006a0  74 69 6e 79 75 73 62 0a  00 00 00 00 00 00 00 00  |tinyusb.........|
+    000006b0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+    *
+    00000800
+
+Viewing the other one is left as an exercise to the reader.
+
+
 SWD
 ===
 
@@ -494,8 +646,10 @@ The following chapters in the official "Getting Started" guide are relevant:
 License
 =======
 
-All of the Raspberry Pi Pico example code is Copyright by Raspberry Pi
-(Trading) Ltd. and released under the BSD 3 clause license.
+The example code in ``blink/`` and ``hello_world/`` is Copyright by Raspberry
+Pi (Trading) Ltd. and released under the BSD 3 clause license. The example code
+in ``msc_dual_lun/`` is Copyright by Ha Thach (tinyusb.org) and released under
+the MIT license.
 
 
 Resources
@@ -505,6 +659,7 @@ Resources
 #. `Raspberry Pi Pico datasheet`_
 #. `Raspberry Pi Pico C/C++ SDK`_
 #. `Raspberry Pi Pico examples`_
+#. `TinyUSB examples`_
 #. `Arm Cortex-M0+`_
 #. `crossdev`_
 #. `Portage repositories`_
@@ -525,6 +680,10 @@ Resources
 .. _unc3nsored:
     https://github.com/xxc3nsoredxx/unc3nsored
 
+.. _the examples directory:
+.. _dual MSC example directory:
+    examples/msc_dual_lun
+
 .. _Getting Started with Raspberry Pi Pico:
     https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf
 
@@ -536,6 +695,9 @@ Resources
 
 .. _Raspberry Pi Pico examples:
     https://github.com/raspberrypi/pico-examples
+
+.. _TinyUSB examples:
+    https://github.com/hathach/tinyusb/tree/master/examples
 
 .. _Arm Cortex-M0+:
     https://developer.arm.com/ip-products/processors/cortex-m/cortex-m0-plus
