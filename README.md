@@ -42,6 +42,8 @@ emaint sync -r unc3nsored
 
 [An Absolutely Stupid Regex Benchmark][stupid benchmark]
 
+[Getting Started with Raspberry Pi Pico on Gentoo][pico]
+
 ## PGP
 [Public key][pgp]
 
@@ -52,6 +54,7 @@ emaint sync -r unc3nsored
 [yubikey]: yubikey_linux_2fa/
 [yubikey gentoo wiki]: https://wiki.gentoo.org/wiki/YubiKey
 [stupid benchmark]: stupid_benchmark/
+[pico]: pico/
 
 <!-- public key links will stay at the end, raw download last -->
 [pgp]: https://raw.githubusercontent.com/xxc3nsoredxx/xxc3nsoredxx/master/pubkey.asc
