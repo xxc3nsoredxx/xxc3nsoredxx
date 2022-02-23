@@ -12,9 +12,9 @@ Requirements
 
 #. Raspberry Pi Pico (duh)
 #. Gentoo
-#. ``>sys-devel/crossdev-20211121``
+#. ``>sys-devel/crossdev-20220205``
 
-   - Versions ``20211121`` and earlier may require `this patch`_. See `#831165`_
+   - Versions ``20220205`` and earlier may require `this patch`_. See `#831165`_
      for more details.
 
 #. ``app-eselect/eselect-repository``
@@ -64,8 +64,8 @@ too many points of failure. Plus, it's less maintainable.
 Creating an overlay
 -------------------
 
-**Note:** Going into detail on how Portage's repos work is beyond the scope of
-this document. I might drop a link in resources_ if I remember.
+**Note:** Going into detail on how ebuild repositories work is beyond the scope
+of this document. I might drop a link in resources_ if I remember.
 
 The basic structure we need to create::
     
@@ -662,7 +662,7 @@ Resources
 #. `TinyUSB examples`_
 #. `Arm Cortex-M0+`_
 #. `crossdev`_
-#. `Portage repositories`_
+#. `Ebuild repositories`_
 
 .. _This patch:
 .. _crossdev bug fix:
@@ -709,5 +709,5 @@ Resources
 .. _crossdev:
     https://wiki.gentoo.org/wiki/Crossdev
 
-.. _Portage repositories:
+.. _Ebuild repositories:
     https://wiki.gentoo.org/wiki/Repository_format
