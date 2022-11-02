@@ -10,8 +10,7 @@ The bio field on the profile is quite short, so finding out I could make a profi
 Also, I don't have other social media or blog or anything, so why not figure out how to turn my GitHub profile into a poor, hackish version of that?
 
 ## Education
-I've got a BS in Computer Science, and I have one semester left until I get my Master's.
-I'm in my school's Information Assurance track which focuses on cyber security related coursework, and I'm also trying to get the Graduate Level Designation in Cyber Operations.
+I've got a BS in Computer Science, and a Master's in CS with a specialization in Information Assurance and Graduate Level Designation in Cyber Operations.
 
 ## Interests and whatnot
 My main interests are cyber security, low level development, and Linux.

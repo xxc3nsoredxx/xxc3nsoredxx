@@ -39,7 +39,7 @@ For a while, I ran Arch Linux on my Raspberry Pi because Raspbian kept crashing 
 Then again the 1st gen Model B had a 700 MHz CPU and 512 MiB of RAM, so perhaps asking it to drive an external display while also having a USB keyboard and mouse plugged in was asking a lot.
 
 My main distro of choice these days is Gentoo.
-I've ran it on two different laptops for nearly 5 years now I think and plan on sticking with it for the foreseeable future.
+I've ran it on two different laptops for something like 6 years now I think and plan on sticking with it for the foreseeable future.
 Manually configuring the kernel and controlling package compilation with USE flags to include only the features I need fits my DIY aesthetic perfectly.
 Unsurprisingly perhaps, a lot of what you can find on here revolves around Linux.
 For example, [these random utilities][misc-utils] and [my collection of dotfiles][dotfiles].
