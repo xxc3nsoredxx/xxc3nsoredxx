@@ -236,9 +236,12 @@ GCC with LTO
 
 Time to build::
 
+    2023-12-04T19:24:07 >>> sys-devel/gcc-13.2.1_p20230826: 1 hour, 7 minutes, 47 seconds
 
 Size::
 
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 302.2M 
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 309404 KiB
 
 
 GCC with LTO + PGO
@@ -246,9 +249,12 @@ GCC with LTO + PGO
 
 Time to build::
 
+    2023-12-04T22:19:42 >>> sys-devel/gcc-13.2.1_p20230826: 1 hour, 31 minutes, 15 seconds
 
 Size::
 
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 274.0M 
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 280597 KiB
 
 
 GCC with PGO
