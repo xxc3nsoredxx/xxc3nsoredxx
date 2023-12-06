@@ -262,6 +262,9 @@ GCC with PGO
 
 Time to build::
 
+    2023-12-05T18:37:36 >>> sys-devel/gcc-13.2.1_p20230826: 54 minutes, 46 seconds
 
 Size::
 
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 282.7M 
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 289477 KiB
