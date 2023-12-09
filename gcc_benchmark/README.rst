@@ -62,12 +62,14 @@ Binutils
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    2m15.868s
+    user    14m11.359s
+    sys     2m15.588s
 
 Size::
 
+    sys-devel/binutils-2.40-r9: 414 files (413 unique), 92 non-files, 28.9M
+    sys-devel/binutils-2.40-r9: 414 files (413 unique), 92 non-files, 29598 KiB
 
 
 Python
@@ -75,12 +77,14 @@ Python
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    11m3.406s
+    user    59m54.846s
+    sys     5m42.692s
 
 Size::
 
+    dev-lang/python-3.11.6: 7209 files, 298 non-files, 177.0M
+    dev-lang/python-3.11.6: 7209 files, 298 non-files, 181277 KiB
 
 
 Kernel
@@ -88,12 +92,16 @@ Kernel
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    7m20.895s
+    user    96m58.291s
+    sys     14m5.288s
 
 Size::
 
+    2.1G        /tmp/temp_root/usr/src/linux-6.1.57-gentoo/
+    2198064K    /tmp/temp_root/usr/src/linux-6.1.57-gentoo/
+    -rwxr-xr-x. 1 oskari oskari 71427960 Dec  9 00:26 /tmp/temp_root/usr/src/linux-6.1.57-gentoo/vmlinux*
+    -rwxr-xr-x. 1 oskari oskari 69M Dec  9 00:26 /tmp/temp_root/usr/src/linux-6.1.57-gentoo/vmlinux*
 
 
 GCC
