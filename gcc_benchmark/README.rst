@@ -109,12 +109,14 @@ GCC
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    36m35.221s
+    user    321m30.955s
+    sys     33m26.296s
 
 Size::
 
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 295.9M
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 303005 KiB
 
 
 GCC with LTO
@@ -122,12 +124,14 @@ GCC with LTO
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    64m11.967s
+    user    728m19.839s
+    sys     45m34.880s
 
 Size::
 
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 302.2M
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 309404 KiB
 
 
 GCC with PGO
@@ -135,12 +139,14 @@ GCC with PGO
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    57m14.651s
+    user    501m28.004s
+    sys     52m38.481s
 
 Size::
 
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 282.7M
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 289477 KiB
 
 
 GCC with LTO + PGO
@@ -148,12 +154,14 @@ GCC with LTO + PGO
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    96m57.870s
+    user    1132m17.418s
+    sys     70m58.155s
 
 Size::
 
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 274.0M
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 280601 KiB
 
 
 Using GCC with LTO
