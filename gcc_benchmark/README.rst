@@ -172,12 +172,14 @@ Binutils
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    2m13.873s
+    user    13m52.968s
+    sys     2m17.245s
 
 Size::
 
+    sys-devel/binutils-2.40-r9: 414 files (413 unique), 92 non-files, 28.9M
+    sys-devel/binutils-2.40-r9: 414 files (413 unique), 92 non-files, 29598 KiB
 
 
 Python
@@ -185,12 +187,14 @@ Python
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    10m32.894s
+    user    54m48.605s
+    sys     5m17.111s
 
 Size::
 
+    dev-lang/python-3.11.6: 7209 files, 298 non-files, 177.0M
+    dev-lang/python-3.11.6: 7209 files, 298 non-files, 181269 KiB
 
 
 Kernel
@@ -198,12 +202,16 @@ Kernel
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    6m49.982s
+    user    89m10.503s
+    sys     13m38.702s
 
 Size::
 
+    2.1G        /tmp/temp_root/usr/src/linux-6.1.57-gentoo/
+    2198052K    /tmp/temp_root/usr/src/linux-6.1.57-gentoo/
+    -rwxr-xr-x. 1 oskari oskari 71427808 Dec 10 15:04 /tmp/temp_root/usr/src/linux-6.1.57-gentoo/vmlinux*
+    -rwxr-xr-x. 1 oskari oskari 69M Dec 10 15:04 /tmp/temp_root/usr/src/linux-6.1.57-gentoo/vmlinux*
 
 
 GCC
@@ -211,12 +219,14 @@ GCC
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    37m29.356s
+    user    332m14.181s
+    sys     34m12.848s
 
 Size::
 
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 295.9M
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 303005 KiB
 
 
 GCC with LTO
@@ -224,12 +234,14 @@ GCC with LTO
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    61m44.211s
+    user    693m57.711s
+    sys     43m58.570s
 
 Size::
 
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 302.2M
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 309404 KiB
 
 
 GCC with PGO
@@ -237,12 +249,14 @@ GCC with PGO
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    52m38.653s
+    user    434m35.927s
+    sys     47m30.270s
 
 Size::
 
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 282.7M
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 289477 KiB
 
 
 GCC with LTO + PGO
@@ -250,12 +264,14 @@ GCC with LTO + PGO
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    93m58.675s
+    user    1083m32.239s
+    sys     69m26.225s
 
 Size::
 
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 274.0M
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 280597 KiB
 
 
 Using GCC with PGO
