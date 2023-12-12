@@ -282,12 +282,14 @@ Binutils
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    2m5.087s
+    user    12m43.125s
+    sys     2m12.778s
 
 Size::
 
+    sys-devel/binutils-2.40-r9: 414 files (413 unique), 92 non-files, 28.9M
+    sys-devel/binutils-2.40-r9: 414 files (413 unique), 92 non-files, 29598 KiB
 
 
 Python
@@ -295,12 +297,14 @@ Python
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    10m3.910s
+    user    52m48.963s
+    sys     5m9.485s
 
 Size::
 
+    dev-lang/python-3.11.6: 7209 files, 298 non-files, 177.0M
+    dev-lang/python-3.11.6: 7209 files, 298 non-files, 181273 KiB
 
 
 Kernel
@@ -308,12 +312,16 @@ Kernel
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    6m7.167s
+    user    78m11.686s
+    sys     13m9.938s
 
 Size::
 
+    2.1G        /tmp/temp_root/usr/src/linux-6.1.57-gentoo/
+    2198192K    /tmp/temp_root/usr/src/linux-6.1.57-gentoo/
+    -rwxr-xr-x. 1 oskari oskari 71450488 Dec 11 20:50 /tmp/temp_root/usr/src/linux-6.1.57-gentoo/vmlinux*
+    -rwxr-xr-x. 1 oskari oskari 69M Dec 11 20:50 /tmp/temp_root/usr/src/linux-6.1.57-gentoo/vmlinux*
 
 
 GCC
@@ -321,12 +329,14 @@ GCC
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    35m24.509s
+    user    307m14.042s
+    sys     32m34.184s
 
 Size::
 
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 295.9M
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 303005 KiB
 
 
 GCC with LTO
@@ -334,12 +344,14 @@ GCC with LTO
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    59m15.142s
+    user    659m9.472s
+    sys     42m17.251s
 
 Size::
 
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 302.2M
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 309404 KiB
 
 
 GCC with PGO
