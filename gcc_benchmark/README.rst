@@ -359,12 +359,14 @@ GCC with PGO
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    51m3.463s
+    user    417m20.812s
+    sys     46m5.245s
 
 Size::
 
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 282.7M
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 289477 KiB
 
 
 GCC with LTO + PGO
@@ -372,12 +374,14 @@ GCC with LTO + PGO
 
 Time to build::
 
-    real    
-    user    
-    sys     
+    real    94m34.405s
+    user    1086m57.790s
+    sys     69m38.408s
 
 Size::
 
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 274.0M
+    sys-devel/gcc-13.2.1_p20230826: 1729 files (1725 unique), 152 non-files, 280577 KiB
 
 
 Using GCC with LTO and PGO
