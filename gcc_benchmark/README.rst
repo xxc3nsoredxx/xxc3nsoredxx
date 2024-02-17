@@ -34,8 +34,6 @@ Build and time kernel::
 
 Sizes for kernel::
 
-    /tmp/temp_root/usr/src/linux-6.1.57-gentoo/ $ du -d 0 -ach
-    /tmp/temp_root/usr/src/linux-6.1.57-gentoo/ $ du -d 0 -ach -BK
     /tmp/temp_root/usr/src/linux-6.1.57-gentoo/ $ ls -alF vmlinux
     /tmp/temp_root/usr/src/linux-6.1.57-gentoo/ $ ls -ahlF vmlinux
 
@@ -119,8 +117,6 @@ Time to build::
 
 Size::
 
-    2.1G        /tmp/temp_root/usr/src/linux-6.1.57-gentoo/
-    2198064K    /tmp/temp_root/usr/src/linux-6.1.57-gentoo/
     -rwxr-xr-x. 1 oskari oskari 71427960 Dec  9 00:26 /tmp/temp_root/usr/src/linux-6.1.57-gentoo/vmlinux*
     -rwxr-xr-x. 1 oskari oskari 69M Dec  9 00:26 /tmp/temp_root/usr/src/linux-6.1.57-gentoo/vmlinux*
 
@@ -229,8 +225,6 @@ Time to build::
 
 Size::
 
-    2.1G        /tmp/temp_root/usr/src/linux-6.1.57-gentoo/
-    2198052K    /tmp/temp_root/usr/src/linux-6.1.57-gentoo/
     -rwxr-xr-x. 1 oskari oskari 71427808 Dec 10 15:04 /tmp/temp_root/usr/src/linux-6.1.57-gentoo/vmlinux*
     -rwxr-xr-x. 1 oskari oskari 69M Dec 10 15:04 /tmp/temp_root/usr/src/linux-6.1.57-gentoo/vmlinux*
 
@@ -339,8 +333,6 @@ Time to build::
 
 Size::
 
-    2.1G        /tmp/temp_root/usr/src/linux-6.1.57-gentoo/
-    2198192K    /tmp/temp_root/usr/src/linux-6.1.57-gentoo/
     -rwxr-xr-x. 1 oskari oskari 71450488 Dec 11 20:50 /tmp/temp_root/usr/src/linux-6.1.57-gentoo/vmlinux*
     -rwxr-xr-x. 1 oskari oskari 69M Dec 11 20:50 /tmp/temp_root/usr/src/linux-6.1.57-gentoo/vmlinux*
 
@@ -449,8 +441,6 @@ Time to build::
 
 Size::
 
-    2.1G        /tmp/temp_root/usr/src/linux-6.1.57-gentoo/
-    2198056K    /tmp/temp_root/usr/src/linux-6.1.57-gentoo/
     -rwxr-xr-x. 1 oskari oskari 71427992 Dec 13 20:20 /tmp/temp_root/usr/src/linux-6.1.57-gentoo/vmlinux*
     -rwxr-xr-x. 1 oskari oskari 69M Dec 13 20:20 /tmp/temp_root/usr/src/linux-6.1.57-gentoo/vmlinux*
 
