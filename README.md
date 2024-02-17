@@ -43,6 +43,8 @@ emaint sync -r unc3nsored
 
 [Getting Started with Raspberry Pi Pico on Gentoo][pico]
 
+[A Useless GCC Benchmark][gcc benchmark]
+
 ## PGP
 [Public key][pgp]
 
@@ -54,6 +56,7 @@ emaint sync -r unc3nsored
 [yubikey gentoo wiki]: https://wiki.gentoo.org/wiki/YubiKey
 [stupid benchmark]: stupid_benchmark/
 [pico]: pico/
+[gcc benchmark]: gcc_benchmark/
 
 <!-- public key links will stay at the end, raw download last -->
 [pgp]: https://raw.githubusercontent.com/xxc3nsoredxx/xxc3nsoredxx/master/pubkey.asc
