@@ -2,6 +2,10 @@
 Useless Benchmark of GCC
 ========================
 
+This is a Highly Scientific (TM) benchmark of GCC, comparing "plain" GCC, GCC
+built with LTO, GCC built with PGO, and GCC built with both LTO and PGO. These
+are the steps I took, repeated for each "version" of GCC:
+
 Build and time binutils::
 
     $ FEATURES='-jobserver' ROOT=/tmp/temp_root ebuild "$(equery w sys-devel/binutils)" clean prepare
@@ -49,11 +53,22 @@ Size for GCC::
     $ ROOT=/tmp/temp_root qsize -kv sys-devel/gcc
 
 .. NOTE::
-   Binutils and Python both have ``lto`` and ``pgo`` USE flags enabled.
+   Binutils and Python both have ``lto`` and ``pgo`` USE flags enabled in order
+   to have them be built with LTO and PGO. Although, these flags seem to be
+   disappearing from the packages and will need to be enabled in ``CFLAGS`` in
+   the future (curse you for making me change my workflow).
 
+
+The data
+========
+
+Here's my Highly Scientific (TM) data. Feast your eyes upon the tables.
+
+
+.. _the first table:
 
 Using GCC without LTO or PGO
-============================
+----------------------------
 
 +-----------------+----------------------------------------+---------------------+
 |                 | Build Time                             | Size                |
@@ -76,8 +91,10 @@ Using GCC without LTO or PGO
 +-----+-----------+------------+--------------+------------+--------+------------+
 
 
+.. _the second table:
+
 Using GCC with LTO
-==================
+------------------
 
 +-----------------+----------------------------------------+---------------------+
 |                 | Build Time                             | Size                |
@@ -100,8 +117,10 @@ Using GCC with LTO
 +-----+-----------+------------+--------------+------------+--------+------------+
 
 
+.. _the third table:
+
 Using GCC with PGO
-==================
+------------------
 
 +-----------------+----------------------------------------+---------------------+
 |                 | Build Time                             | Size                |
@@ -124,8 +143,10 @@ Using GCC with PGO
 +-----+-----------+------------+--------------+------------+--------+------------+
 
 
+.. _the fourth table:
+
 Using GCC with LTO and PGO
-==========================
+--------------------------
 
 +-----------------+----------------------------------------+---------------------+
 |                 | Build Time                             | Size                |
@@ -147,3 +168,113 @@ Using GCC with LTO and PGO
 |     | LTO + PGO | 88m3.736s  | 1002m56.349s | 65m5.550s  | 274.0M | 280593 KiB |
 +-----+-----------+------------+--------------+------------+--------+------------+
 
+
+That thing where you analyze
+============================
+
+No good scientific work is complete without this section. So here's my Highly
+Scientific (TM) analysis.
+
+`The first table`_ is just the baseline stats. It's using a boring/plain GCC.
+This doesn't mean it's devoid of anything interesting. On the contrary, here
+are some things which surprised me:
+
+- Building GCC with LTO took longer than building it with PGO.
+- GCC with LTO had the largest size. I expected it to be smaller than the plain
+  GCC. Whereas PGO was smaller than plain, and LTO + PGO was the smallest!
+
+`The second table`_, using an LTO'd GCC, hopefully sets a trend for the future
+runs, although I'm not sure if all of these are real differences vs just how
+things happen to get scheduled:
+
+- Binutils built about 2s faster, with the "user" time being about 20s less.
+- Python built about 30s faster, with the "user" time being about 5min less.
+- The kernel also built about 30s faster, but here the "user" time was about
+  8min less.
+- Interestingly, the plain GCC took longer here by about 1min for both "real"
+  and "user" time.
+
+  - GCC with LTO was about 2min 30s faster, with "user" time being about 35min
+    less.
+  - GCC with PGO was about 5min faster, "user" time was almost 70min less.
+  - GCC with both was only about 3min faster, "user" time about 50min less.
+
+`The third table`_, with a PGO'd GCC, should hopefully be even better.
+Otherwise my life has been a lie:
+
+- Binutils was about 9s faster than LTO, and "user" time was about 1min 10s
+  less.
+- Python was almost 30s faster, and "user" time was about 2min less.
+- The kernel built about 43s faster, and "user" time was about 11min less.
+- Finally GCC was also faster
+
+  - Plain GCC was about 2min faster, and "user" time was about 25min less.
+  - GCC with LTO was about 2min 30s faster, "user" time about 45min less.
+  - GCC with PGO was about 1min 30s faster, "user" time about 17min less.
+  - Except GCC with LTO and PGO was slower now. About 30s slower, and "user"
+    time was about 3min 20s more.
+
+Last, and hopefully least, we have `the fourth table`_ with and LTO'd and PGO'd
+GCC:
+
+- Binutils was about 4s faster than PGO, and "user" time about 23s less.
+- Python took like 8s less, for both "real" and "user" times.
+- The kernel was like 5s faster, and "user" time was like 1min 40s less.
+- Finally GCC was also faster (for real this time?)
+
+  - Plain GCC built like 21s faster and "user" time was like 4min less.
+  - GCC with LTO took 1min 25s less and "user" time was like 22min less.
+  - Dammit, GCC with PGO took like 32s more and "user" time was like 6min 30s
+    higher.
+  - GCC with LTO and PGO was faster by like 6min 30s and "user" time was like
+    84min less.
+
+
+Build time differences
+----------------------
+
+In case you don't want to read all that, then here's a nice table summarizing
+the above in order to see the difference between using plain GCC and GCC with
+both LTO and PGO. You just have to trust me that I got my mental time math
+correct (I know I don't trust me). They're also just approximates. I've left
+out the "sys" time since it's not as interesting (time spent in "system mode"
+according to one of my favorite man pages -- ``bash(1)``).
+
++-----------------+-------------------------+
+|                 | Build Time              |
+|                 +-----------+-------------+
+| Build Target    | Real      | User        |
++=================+===========+=============+
+| Binutils        | -15s      | -1min 53s   |
++-----------------+-----------+-------------+
+| Python          | -1min 8s  | -7min 8s    |
++-----------------+-----------+-------------+
+| Kernel          | -1min 18s | -20min 40s  |
++-----+-----------+-----------+-------------+
+|     | Plain     | -1min 21s | -28min      |
+|     +-----------+-----------+-------------+
+|     | LTO       | -6min 25s | -102min     |
+| GCC +-----------+-----------+-------------+
+|     | PGO       | -5min 58s | -80min 30s  |
+|     +-----------+-----------+-------------+
+|     | LTO + PGO | -9min     | -130min 40s |
++-----+-----------+-----------+-------------+
+
+
+Final remarks
+-------------
+
+Now, the whole point of this was to see if it makes sense to build GCC with LTO
+and PGO enabled:
+
+- Plain GCC building itself: ~37 minutes
+- GCC with LTO and PGO building itself: ~88 minutes
+
+Is the extra ~51 minutes for GCC worth it? According to my Highly Scientific
+(TM) extrapolation of the data, as long as you build a few hundred packages
+between each GCC update then it is. Of course, there might be packages that see
+slightly bigger speedups, which brings that number down.
+
+Machine specs matter too. Lower end machines will take longer to LTO + PGO GCC.
+These tests were run on my Thinkpad T14 (gen 1) with Ryzen 7 PRO 4750U and 32
+GiB of RAM. So, for me, I think it's worth it.
